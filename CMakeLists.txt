@@ -11,7 +11,9 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
-  message_generation
+  nav_msgs
+  geometry_msgs
+  #message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -205,3 +207,5 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+add_executable(MPC_node src/MPC_main.cpp)
+target_link_libraries(MPC_node ${catkin_LIBRARIES})
