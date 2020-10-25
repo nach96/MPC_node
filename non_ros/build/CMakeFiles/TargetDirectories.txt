@@ -1,0 +1,4 @@
+/home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/build/CMakeFiles/rebuild_cache.dir
+/home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/build/CMakeFiles/myNLP.dir
+/home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/build/CMakeFiles/edit_cache.dir
+/home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/build/CMakeFiles/ipopt_example.dir
