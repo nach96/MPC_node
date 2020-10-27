@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/try_matrix.dir/Try_matrix.cpp.o  -o try_matrix  -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lipopt 

@@ -6,22 +6,12 @@
 
 #IncludeRegexTransform: 
 
-/home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/MyNLP.cpp
-MyNLP.hpp
-/home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/MyNLP.hpp
-cassert
--
-math.h
--
+/home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/Try_matrix.cpp
 iostream
 -
-fstream
--
-
-/home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/MyNLP.hpp
-IpTNLP.hpp
-/home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/IpTNLP.hpp
 vector
+-
+IpTNLP.hpp
 -
 
 /usr/local/include/coin-or/IpAlgTypes.hpp

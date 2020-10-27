@@ -20,3 +20,6 @@ add_executable(ipopt_example cpp_example.cpp)
 
 target_link_libraries(ipopt_example myNLP)
 target_link_libraries(ipopt_example ipopt)
+
+add_executable(try_matrix Try_matrix.cpp)
+target_link_libraries(try_matrix ipopt)

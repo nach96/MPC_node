@@ -9,6 +9,8 @@
 /home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/MyNLP.hpp
 IpTNLP.hpp
 /home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/IpTNLP.hpp
+vector
+-
 
 /home/inazio/TFG/code/catkin_ws/src/MPC_node/non_ros/cpp_example.cpp
 IpIpoptApplication.hpp

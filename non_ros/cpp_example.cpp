@@ -12,10 +12,7 @@
 
 using namespace Ipopt;
 
-int main(
-   int,
-   char**
-)
+int main(int argv, char* argc[])
 {
    // Create an instance of your nlp...
    SmartPtr<TNLP> mynlp = new MyNLP();
@@ -25,6 +22,11 @@ int main(
    // We are using the factory, since this allows us to compile this
    // example with an Ipopt Windows DLL
    SmartPtr<IpoptApplication> app = IpoptApplicationFactory();
+    app->RethrowNonIpoptException(true);
+
+   app->Options()->SetNumericValue("tol", 1e-7);
+   app->Options()->SetStringValue("hessian_approximation", "limited-memory");
+   //app->Options()->SetStringValue("derivative_test", "first-order");
 
    // Initialize the IpoptApplication and process the options
    ApplicationReturnStatus status;
@@ -47,6 +49,17 @@ int main(
       std::cout << std::endl << std::endl << "*** The final value of the objective function is " << final_obj << '.'
                 << std::endl;
    }
+
+
+
+   /*
+   for(std::vector<int>::iterator it = finalXr.begin() ; it != finalXr.end(); ++it){
+      std::cout << ' ' << *it;
+      std::cout << '\n';
+
+   }
+   */
+
 
    return (int) status;
 }

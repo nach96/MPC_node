@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named try_matrix
+
+# Build rule for target.
+try_matrix: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 try_matrix
+.PHONY : try_matrix
+
+# fast build rule for target.
+try_matrix/fast:
+	$(MAKE) -f CMakeFiles/try_matrix.dir/build.make CMakeFiles/try_matrix.dir/build
+.PHONY : try_matrix/fast
+
+#=============================================================================
 # Target rules for targets named myNLP
 
 # Build rule for target.
@@ -163,6 +176,33 @@ MyNLP.cpp.s:
 	$(MAKE) -f CMakeFiles/myNLP.dir/build.make CMakeFiles/myNLP.dir/MyNLP.cpp.s
 .PHONY : MyNLP.cpp.s
 
+Try_matrix.o: Try_matrix.cpp.o
+
+.PHONY : Try_matrix.o
+
+# target to build an object file
+Try_matrix.cpp.o:
+	$(MAKE) -f CMakeFiles/try_matrix.dir/build.make CMakeFiles/try_matrix.dir/Try_matrix.cpp.o
+.PHONY : Try_matrix.cpp.o
+
+Try_matrix.i: Try_matrix.cpp.i
+
+.PHONY : Try_matrix.i
+
+# target to preprocess a source file
+Try_matrix.cpp.i:
+	$(MAKE) -f CMakeFiles/try_matrix.dir/build.make CMakeFiles/try_matrix.dir/Try_matrix.cpp.i
+.PHONY : Try_matrix.cpp.i
+
+Try_matrix.s: Try_matrix.cpp.s
+
+.PHONY : Try_matrix.s
+
+# target to generate assembly for a file
+Try_matrix.cpp.s:
+	$(MAKE) -f CMakeFiles/try_matrix.dir/build.make CMakeFiles/try_matrix.dir/Try_matrix.cpp.s
+.PHONY : Try_matrix.cpp.s
+
 cpp_example.o: cpp_example.cpp.o
 
 .PHONY : cpp_example.o
@@ -197,12 +237,16 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... try_matrix"
 	@echo "... myNLP"
 	@echo "... edit_cache"
 	@echo "... ipopt_example"
 	@echo "... MyNLP.o"
 	@echo "... MyNLP.i"
 	@echo "... MyNLP.s"
+	@echo "... Try_matrix.o"
+	@echo "... Try_matrix.i"
+	@echo "... Try_matrix.s"
 	@echo "... cpp_example.o"
 	@echo "... cpp_example.i"
 	@echo "... cpp_example.s"
