@@ -172,10 +172,11 @@ private:
    double wmax = 2.0; //Maximum angular speed
    double dist2 = 9.0; //Desired distance ^2   (It is always used squared)
    double ang = -1.57; //Desired perspective angle
-   double xp = 4.0;
-   double yp = 0.0;
+   const double xp = 4.0;//X persona
+   const double yp = 0.0;//Y persona
+   //const double ap = 0.0;//Angulo persona
    double K1 = 1.0; //Gain position error
-   double K2 = 80.0; //Gain angle error
+   double K2 = 100.0; //Gain angle error
    std::vector<Number> Xr;
    std::vector<Number> Yr;
    std::vector<Number> Titar;

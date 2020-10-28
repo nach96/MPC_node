@@ -142,12 +142,13 @@ bool MyNLP::get_starting_point(
    x[5*N-3]=0.0;
    x[5*N-4]=0.0;
    x[5*N-5]=2.0;
+   */
    
    //Start all variables as positives
    for(int i=0;i<5*N;i++){
       x[i]=1;
    }
-   */
+
 
    // we initialize x in bounds, in the upper right quadrant
    
@@ -165,9 +166,9 @@ bool MyNLP::eval_f(
    // return the value of the objective function
 
    for(int i=0; i<3*(N+1); i+=3){
-      Number xpr2 = (x[i]-xp)*(x[i]-xp);
-      Number ypr2 = (x[i+1]-yp)*(x[i+1]-yp);
-      obj_value += K1*(xpr2 + ypr2 - dist2)*(xpr2 + ypr2 - dist2) + K2*(x[i+2]-ang)*(x[i+2]-ang);
+      Number xpr2 = (xp-x[i])*(xp-x[i]);
+      Number ypr2 = (yp-x[i+1])*(yp-x[i+1]);
+      obj_value += K1*(xpr2 + ypr2 - dist2)*(xpr2 + ypr2 - dist2) + K2*((x[i+2])-ang)*((x[i+2])-ang);
    }
    
 
@@ -185,12 +186,12 @@ bool MyNLP::eval_grad_f(
 
 
    for(int i=0; i<5*(N+1); i+=5){
-      Number xpr2 = (x[i]-xp)*(x[i]-xp);
-      Number ypr2 = (x[i+1]-yp)*(x[i+1]-yp);
+       Number xpr2 = (xp-x[i])*(xp-x[i]);
+       Number ypr2 = (yp-x[i+1])*(yp-x[i+1]);
 
-      grad_f[i] = 4.0*K1*(x[i]-xp)*(xpr2 + ypr2 - dist2);
-      grad_f[i+1] = 4.0*K1*(x[i+1]-yp)*(xpr2 + ypr2 - dist2);
-      grad_f[i+2] = 2.0*K2*x[i+2] - 2.0*K2*ang;
+      grad_f[i] = 4.0*K1*(xp-x[i])*(xpr2 + ypr2 - dist2);
+      grad_f[i+1] = 4.0*K1*(yp-x[i+1])*(xpr2 + ypr2 - dist2);
+      grad_f[i+2] = 2.0*K2*(x[i+2] - ang);
       grad_f[i+3] = 0;
       grad_f[i+4] = 0;
 

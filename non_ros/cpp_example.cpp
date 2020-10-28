@@ -25,7 +25,7 @@ int main(int argv, char* argc[])
     app->RethrowNonIpoptException(true);
 
    app->Options()->SetNumericValue("tol", 1e-7);
-   //app->Options()->SetStringValue("hessian_approximation", "limited-memory");
+   app->Options()->SetStringValue("hessian_approximation", "limited-memory");
    //app->Options()->SetStringValue("derivative_test", "first-order");
 
    // Initialize the IpoptApplication and process the options
