@@ -128,7 +128,7 @@ bool MyNLP::get_starting_point(
    Number* lambda
 )
 {
-   // I should try to give starting values at least for x.
+   // Give starting values at least for x.
    assert(init_x == true);
    assert(init_z == false);
    assert(init_lambda == false);
@@ -190,8 +190,7 @@ bool MyNLP::eval_grad_f(
 
       grad_f[i] = 4.0*K1*(x[i]-xp)*(xpr2 + ypr2 - dist2);
       grad_f[i+1] = 4.0*K1*(x[i+1]-yp)*(xpr2 + ypr2 - dist2);
-      grad_f[i+2] = 2.0*K2*x[i+2];
-      //grad_f[i+2] = 0;
+      grad_f[i+2] = 2.0*K2*x[i+2] - 2.0*K2*ang;
       grad_f[i+3] = 0;
       grad_f[i+4] = 0;
 
@@ -384,19 +383,19 @@ bool MyNLP::eval_h(
          Number xpr2 = (x[i]-xp)*(x[i]-xp);
          Number ypr2 = (x[i+1]-yp)*(x[i+1]-yp);
 
-         values[k]=8.0*K1*xpr2 + 4.0*K1*(xpr2+ypr2-dist2); //term from grad2f
+         values[k]=obj_factor*(8.0*K1*xpr2 + 4.0*K1*(xpr2+ypr2-dist2)); //term from grad2f
          k++;
-         values[k]=8.0*K1*(x[i]-xp)*(x[i+1]-yp);//term from grad2f
+         values[k]=obj_factor*(8.0*K1*(x[i]-xp)*(x[i+1]-yp));//term from grad2f
          k++;
-         values[k]=8.0*K1*ypr2 + 4.0*K1*(xpr2+ypr2-dist2);//term from grad2f
+         values[k]=obj_factor*(8.0*K1*ypr2 + 4.0*K1*(xpr2+ypr2-dist2));//term from grad2f
          k++;
-         values[k]=8.0*K1*(x[i]-xp)*(x[i+1]-yp);//term from grad2f
+         values[k]=obj_factor*(8.0*K1*(x[i]-xp)*(x[i+1]-yp));//term from grad2f
          k++;
-         values[k] = lambda[j]*dt*x[i+3]*cos(x[i+2]);//term from lambda1,grad2g
+         values[k] = obj_factor*(2.0*K2); //term from grad2f
+         values[k] += lambda[j]*dt*x[i+3]*cos(x[i+2]);//term from lambda1,grad2g
          values[k]+= lambda[j+1]*dt*x[i+3]*sin(x[i+2]);//term from lambda2,grad2g
-         k++;
-         values[k] = 2.0*K2; //term from grad2f
-         values[k]+= lambda[j]*dt*sin(x[i+2]);
+         k++;         
+         values[k]= lambda[j]*dt*sin(x[i+2]);
          values[k]+= -lambda[j+1]*dt*cos(x[i+2]);
          k++;
          values[k] = lambda[j]*dt*sin(x[i+2]);
@@ -405,13 +404,10 @@ bool MyNLP::eval_h(
 
 
       }
-
-
-      // Note: off-diagonal elements are zero for this problem
    }
-   //return true;
+   return true;
    
-   return false; //Dummy function because Quasi-Newton Approximation is being used
+   //return false; //Dummy function because Quasi-Newton Approximation is being used
    
 }
 
