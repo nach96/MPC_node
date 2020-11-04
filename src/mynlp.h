@@ -2,19 +2,51 @@
 #include <cppad/cppad.hpp>
 #include <cppad/ipopt/solve.hpp>
 
+using CppAD::AD;
+
 typedef CPPAD_TESTVECTOR( double ) Dvector;
+
+
+
+#ifndef FG_EVAL_H
+#define FG_EVAL_H
+
+class FG_eval 
+{
+public:
+    typedef CPPAD_TESTVECTOR( AD<double> ) ADvector;
+
+    FG_eval(double _xp, double _yp, double _ap);
+    void operator()(ADvector& fg, const ADvector& x);
+
+private:
+  double xp;
+  double yp;
+  double ap;
+  AD<double> K1 = 1.0;
+  AD<double> K2 = 1.0E6;
+  AD<double> K3 = 1.0E5;
+  AD<double> dist = 3.0; //E3; //[mm]
+  AD<double> ang = 0.0; //[rad]
+  AD<double> yaw = -1.57; //[rad]
+
+};
+
+
+#endif
+
+
+
+
 
 #ifndef MYNLP_H
 #define MYNLP_H
-
-
-
 
 class myNLP
 {
 public:
     myNLP();
-    void my_solve();
+    void my_solve(double xp, double yp, double ap);
     void save_solution(CppAD::ipopt::solve_result<Dvector> solution);
     //std::string set_options(void);
     //void set_limits(Dvector x_l, Dvector x_u, Dvector g_l, Dvector g_u);
@@ -25,9 +57,11 @@ public:
     std::vector<double> Vr;//(&solution.x[V_start], &solution.x[W_start]);
     std::vector<double> Wr;//(&solution.x[W_start], &solution.x[Vy_start-1]);
 
+private:
+    double vmax = 1.5;//E3; //[mm/s]
+    double wmax = 0.78; //[rad/s]
 
-
-
+   
 
 
 };

@@ -1,6 +1,6 @@
 close all;
 clearvars -except X
-d = 3000;
+d = 3;
 K1 = 1;
 ang_d = 0;
 K2 = 1E6;
@@ -8,7 +8,7 @@ K3 = 1E5;
 yaw_d = -1.57;
 
 ap = 0;
-xp = 4000;
+xp = 4;
 yp = 0;
 
 dist = sqrt( (xp-X(1,:)).^2 + (yp-X(2,:)).^2);

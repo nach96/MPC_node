@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>MPC_node</name>
+  <name>mpc_node</name>
   <version>0.0.0</version>
-  <description>The MPC_node package</description>
+  <description>The mpc_node package</description>
 
   
   <maintainer email="n.cavero.juste@gmail.com">inazio</maintainer>

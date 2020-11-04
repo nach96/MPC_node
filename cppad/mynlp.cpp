@@ -7,9 +7,12 @@ using CppAD::AD;
 //Global variable
 size_t N = 40; //Horizon
 AD<double> dt = 0.1;
-AD<double> xp = 4.0E3; //[mm]
-AD<double> yp = 0.0;
-AD<double> ap = 0.0;
+//AD<double> xp = 4.0E3; //[mm]
+//AD<double> yp = 0.0;
+//AD<double> ap = 0.0;
+//double xp = 4.0e3;
+//double yp = 0.0;
+//double ap = 0.0;
 AD<double> K1 = 1.0;
 AD<double> K2 = 1.0E6;
 AD<double> K3 = 1.0E5;
@@ -37,17 +40,23 @@ bool holonomic = false;
      class FG_eval {
      public:
           typedef CPPAD_TESTVECTOR( AD<double> ) ADvector;
+         FG_eval(double _xp, double _yp, double _ap){
+             xp = _xp;
+             yp = _yp;
+             ap = _ap;
+         }
 
           void operator()(ADvector& fg, const ADvector& x)
           {
+             /*
               if(holonomic){
                   holonomic_fg(fg,x);
 
               }else{
                   non_holonomic_fg(fg,x);
               }
+              */
 
-              /*
               assert( fg.size() == 3*(N-1) + 1 );
               assert( x.size()  == 3*N + 2*(N-1) );
 
@@ -61,31 +70,25 @@ bool holonomic = false;
                      fg[0] += K2*CppAD::pow((ap - x[tita_start+i]) - ang,2);
                      fg[0] += K3*CppAD::pow(CppAD::atan2(yp-x[y_start+i], xp-x[x_start+i])- yaw -x[tita_start+i],2);
                 }
+              for(int i=1,j=1; i < N; i++,j+=3){
+                  AD<double> x0 = x[x_start + i -1];
+                  AD<double> y0 = x[y_start + i -1];
+                  AD<double> tita0 = x[tita_start + i -1];
+                  AD<double> V0 = x[V_start + i -1];
+                  AD<double> W0 = x[W_start + i -1];
+
+                  AD<double> x1 = x[x_start + i];
+                  AD<double> y1 = x[y_start + i];
+                  AD<double> tita1 = x[tita_start + i];
 
 
 
-
-               //From 1 to N. Number of constraints 3*(N-1)
-               for(int i=1,j=1; i < N; i++,j+=3){
-                   AD<double> x0 = x[x_start + i -1];
-                   AD<double> y0 = x[y_start + i -1];
-                   AD<double> tita0 = x[tita_start + i -1];
-                   AD<double> V0 = x[V_start + i -1];
-                   AD<double> W0 = x[W_start + i -1];
-
-                   AD<double> x1 = x[x_start + i];
-                   AD<double> y1 = x[y_start + i];
-                   AD<double> tita1 = x[tita_start + i];
+                  fg[j] = x1 - x0 - dt*CppAD::cos(tita0)*V0;
+                  fg[j+1] = y1 - y0 - dt*CppAD::sin(tita0)*V0;
+                  fg[j+2] = tita1 - tita0 - dt*W0;
 
 
-
-                   fg[j] = x1 - x0 - dt*CppAD::cos(tita0)*V0;
-                   fg[j+1] = y1 - y0 - dt*CppAD::sin(tita0)*V0;
-                   fg[j+2] = tita1 - tita0 - dt*W0;
-
-
-               }
-               */
+              }
 
                return;
           }
@@ -158,7 +161,10 @@ bool holonomic = false;
              }
 
           }
-
+     private:
+          double xp;
+          double yp;
+          double ap;
 
      };
 
@@ -246,16 +252,16 @@ void myNLP::my_solve(){
     }
 
     // object that computes objective and constraints
-    FG_eval fg_eval;
+    FG_eval fg_eval(4.0e3,0.0,0.0);
 
     //std::string options = set_options();
     // options
     std::string options;
     // turn off any printing
-    options += "Integer print_level  5\n";
+    options += "Integer print_level  4\n";
     //options += "String  sb           yes\n";
     // maximum number of iterations
-    options += "Integer max_iter     3000\n";
+    options += "Integer max_iter     500\n";
     options += "Numeric tol          1e-8\n";
     //options += "String  derivative_test            second-order\n";
     //options += "Numeric derivative_test_tol          0.01\n";
@@ -280,13 +286,19 @@ void myNLP::my_solve(){
 
 void myNLP::save_solution(CppAD::ipopt::solve_result<Dvector> solution){
 
-    std::vector<double> Xr(&solution.x[x_start], &solution.x[y_start]);
+    std::vector<double> Xr2(&solution.x[x_start], &solution.x[y_start]);
 
 
-    std::vector<double> Yr(&solution.x[y_start], &solution.x[tita_start]);
-    std::vector<double> Titar(&solution.x[tita_start], &solution.x[V_start]);
-    std::vector<double> Vr(&solution.x[V_start], &solution.x[W_start]);
-    std::vector<double> Wr(&solution.x[W_start], &solution.x[Vy_start-1]);
+    std::vector<double> Yr2(&solution.x[y_start], &solution.x[tita_start]);
+    std::vector<double> Titar2(&solution.x[tita_start], &solution.x[V_start]);
+    std::vector<double> Vr2(&solution.x[V_start], &solution.x[W_start]);
+    std::vector<double> Wr2(&solution.x[W_start], &solution.x[Vy_start-1]);
+
+    Xr = Xr2;
+    Yr=Yr2;
+    Titar = Titar2;
+    Vr=Vr2;
+    Wr=Wr2;
 
 
 
@@ -322,12 +334,12 @@ void myNLP::save_solution(CppAD::ipopt::solve_result<Dvector> solution){
 
       }
       //printf("Wr:");
-       out << "; ";
+       out << 0 << "; ";
       for(auto it = Wr.begin() ; it != Wr.end(); it++){
          out << *it << " ";
 
       }
-      out << "]";
+      out << 0<< " "<< 0 <<"]";
 
 
 

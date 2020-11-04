@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(MPC_node)
+project(mpc_node)
+
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -13,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   nav_msgs
   geometry_msgs
+  tf
   #message_generation
 )
 
@@ -108,7 +110,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES MPC_node
-CATKIN_DEPENDS roscpp rospy std_msgs message_runtime
+CATKIN_DEPENDS roscpp rospy std_msgs message_runtime geometry_msgs
 #  DEPENDS system_lib
 )
 
@@ -118,15 +120,24 @@ CATKIN_DEPENDS roscpp rospy std_msgs message_runtime
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
+set(IPOPT_LIBRARY_DIRS /usr/local/lib)
+set(IPOPT_INCLUDE_DIRS /usr/local/include/coin-or)
+
 include_directories(
 # include
  ${catkin_INCLUDE_DIRS}
+ ${IPOPT_INCLUDE_DIRS}
+ ${CMAKE_SOURCE_DIR}/include
 )
+
+link_directories(${IPOPT_LIBRARY_DIRS})
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/MPC_node.cpp
 # )
+
+add_library(myNLPlib src/mynlp.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -152,6 +163,9 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+target_link_libraries(myNLPlib ipopt)
+
+
 
 #############
 ## Install ##
@@ -207,5 +221,25 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-add_executable(MPC_node src/MPC_main.cpp)
-target_link_libraries(MPC_node ${catkin_LIBRARIES})
+
+
+
+add_executable(${PROJECT_NAME} src/MPC_main.cpp)
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} myNLPlib)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,5 +12,6 @@ message("ipopt include path is: " ${IPOPT_INCLUDE_DIRS} )
 
 add_library(myNLPlib "mynlp.cpp")
 add_executable(${PROJECT_NAME} "main.cpp")
-target_link_libraries(${PROJECT_NAME} ipopt)
+#target_link_libraries(${PROJECT_NAME} ipopt)
+target_link_libraries(myNLPlib ipopt)
 target_link_libraries(${PROJECT_NAME} myNLPlib)
