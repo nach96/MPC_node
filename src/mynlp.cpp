@@ -17,11 +17,16 @@ size_t W_start = V_start + N-1; //-1 as last actions are not applied
 
      
 
-FG_eval::FG_eval(double _xp, double _yp, double _ap){
+FG_eval::FG_eval(double _xp, double _yp, double _ap, double _dist, double _ang, double _yaw, double _K1, double _K2, double _K3){
   xp = _xp;
   yp = _yp;
   ap = _ap;
-
+  dist = _dist;
+  ang = _ang;
+  yaw = _yaw;
+  K1 = _K1;
+  K2 = _K2;
+  K3 = _K3;
 }
 
 void FG_eval::operator()(ADvector& fg, const ADvector& x)
@@ -31,7 +36,6 @@ void FG_eval::operator()(ADvector& fg, const ADvector& x)
     assert( fg.size() == 3*(N-1) + 1 );
     assert( x.size()  == 3*N + 2*(N-1) );
 
-     // Fortran style indexing?
 
      // f(x)
      fg[0]=0;
@@ -41,6 +45,7 @@ void FG_eval::operator()(ADvector& fg, const ADvector& x)
            fg[0] += K2*CppAD::pow((ap - x[tita_start+i]) - ang,2);
            fg[0] += K3*CppAD::pow(CppAD::atan2(yp-x[y_start+i], xp-x[x_start+i])- yaw -x[tita_start+i],2);
       }
+      
     for(int i=1,j=1; i < N; i++,j+=3){
         AD<double> x0 = x[x_start + i -1];
         AD<double> y0 = x[y_start + i -1];
@@ -66,9 +71,12 @@ void FG_eval::operator()(ADvector& fg, const ADvector& x)
 
 
 
-myNLP::myNLP(){}
+myNLP::myNLP(double _vmax, double _wmax){
+  vmax = _vmax;
+  wmax = _wmax;
+}
 
-void myNLP::my_solve(double xp, double yp, double ap){
+void myNLP::my_solve(double xp, double yp, double ap, double dist, double ang, double yaw, double K1, double K2, double K3){
 
     // number of independent variables (domain dimension for f and g)
     size_t nx;
@@ -139,7 +147,7 @@ void myNLP::my_solve(double xp, double yp, double ap){
     }
 
     // object that computes objective and constraints
-    FG_eval fg_eval(xp,yp,ap);
+    FG_eval fg_eval(xp,yp,ap, dist, ang, yaw, K1, K2, K3);
 
     //std::string options = set_options();
     // options
@@ -187,7 +195,7 @@ void myNLP::save_solution(CppAD::ipopt::solve_result<Dvector> solution){
     Vr=Vr2;
     Wr=Wr2;
 
-
+/*
 
       //Print a matrix with the results to plot it in matlab
       std::ofstream out("X.txt");
@@ -227,7 +235,7 @@ void myNLP::save_solution(CppAD::ipopt::solve_result<Dvector> solution){
       }
       out << 0<< " "<< 0 <<"]";
 
-
+*/
 
 
 }

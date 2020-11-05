@@ -19,9 +19,9 @@ Description:
 */
 
 ros::Publisher pubPath;
+ros::Publisher pubV;
 ros::Subscriber subPose0;
 ros::Subscriber subPose1;
-//Publisher v and w.
 
 
 ros::Time time_start; //Start time of each NLP
@@ -33,8 +33,7 @@ bool recived0 = false;
 bool recived1 = false;
 
 
-//-----------------------Create object from class myNLP------------------------------
-myNLP mynlp;
+
 
 
 //----------------------- FUNCTIONS--------------------------------------------------
@@ -77,20 +76,20 @@ void calculate_fake_path(double _xr, double _yr, double _wr,double _xp, double _
 
 }
 
-void publish_new_path(tf::TransformListener* transform_listener){
-    path.poses.resize(N);
-    for( unsigned i=0; i<mynlp.Xr.size(); ++i){
+void publish_new_path(tf::TransformListener* transform_listener, myNLP* mynlp){
+    path.poses.resize(N-2);
+    for( unsigned i=2; i<mynlp->Xr.size(); ++i){ //I dont send the 0 pose. Start with 1 
         geometry_msgs::PoseStamped poseNew;
-        poseNew.pose.position.x = mynlp.Xr[i];
-        poseNew.pose.position.y = mynlp.Yr[i];
-        poseNew.pose.orientation.w = cos(mynlp.Wr[i]/2);
-        poseNew.pose.orientation.z = sin(mynlp.Wr[i]/2);
+        poseNew.pose.position.x = mynlp->Xr[i];
+        poseNew.pose.position.y = mynlp->Yr[i];
+        poseNew.pose.orientation.w = cos(mynlp->Wr[i]/2);
+        poseNew.pose.orientation.z = sin(mynlp->Wr[i]/2);
         poseNew.header.frame_id = "robot_0/base_link"; //Robot_0/base_link but as this node will be inside Robot_0 namespace, you can say directly base_link
 
         geometry_msgs::PoseStamped poseMap;
 
         try{
-            transform_listener->waitForTransform("map", "robot_0/base_link",time_start, ros::Duration(5.0));
+            transform_listener->waitForTransform("map", "robot_0/base_link",time_start, ros::Duration(2.0));
             transform_listener->transformPose("map", time_start, poseNew, "map", poseMap);
 
         }catch(tf::TransformException ex){
@@ -98,9 +97,18 @@ void publish_new_path(tf::TransformListener* transform_listener){
         }
         
 
-        path.poses[i] = poseMap;
+        path.poses[i-2] = poseMap;
     }
     pubPath.publish(path);
+}
+
+void publish_new_actions(myNLP* mynlp){
+    geometry_msgs::Twist cmd_vel;
+    cmd_vel.linear.x = mynlp->Vr[0];
+    cmd_vel.angular.z = mynlp->Wr[0];
+    pubV.publish(cmd_vel);
+
+
 }
 
 int main(int argc, char **argv){
@@ -123,13 +131,16 @@ int main(int argc, char **argv){
 
     ros::init(argc, argv, "MPC_node");
     ros::NodeHandle n;
-    ros::Rate rate(1); //10 Hz. T=0.1s
+    ros::Rate rate(10); //10 Hz. T=0.1s
 
     ROS_INFO("MPC_Node started");
+
+
 
     subPose0 = n.subscribe("/robot_0/amcl_pose", 10, pose0_callback);
     subPose1 = n.subscribe("robot_1/amcl_pose", 10, pose1_callback);
     pubPath = n.advertise<nav_msgs::Path>("robot_0/matlab/path", 10);
+    pubV = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel", 10);
     //frame_id es base respecto a la cual está representado pose. Por eso es map.(En este caso, en el MPC puede que sea el robot o la persona etc.)
     path.header.frame_id= "map";
 
@@ -138,13 +149,27 @@ int main(int argc, char **argv){
     tf::TransformListener transform_listener;
     tf::StampedTransform RT_person_robot;
 
-    //Frames as Parameters
+    //-------------------      ROS PARAM  -----------------------------------------------
 
-    //std::string base_link_frame="base_link";
-    //std::string global_frame="map";
+    double dist = 3.0; // Desired distance between robot and person
+    double ang = 0.0; //Desired tita of the robot
+    double yaw = -1.57; //Desired yaw of the camera (Perspective to look at the person)
+    double K1 = 1.0; //Weight of distance
+    double K2 = 1.0; //Weight of ang
+    double K3 = 1.0; //Weigth of yaw
+    double vmax = 1.5;
+    double wmax = 0.78;
+    n.getParam("distance", dist);
+    n.getParam("angle_tita", ang);
+    n.getParam("yaw", yaw);
+    n.getParam("K_distance", K1);
+    n.getParam("K_ang", K2);
+    n.getParam("K_yaw", K3);
+    n.getParam("v_max", vmax);
+    n.getParam("w_max", wmax);
 
-    //nh.getParam("base_link_frame", base_link_frame);
-    //nh.getParam("global_frame", global_frame);
+    //-----------------------Create object from class myNLP------------------------------
+    myNLP mynlp(vmax,wmax);
     
 
 
@@ -193,17 +218,20 @@ int main(int argc, char **argv){
         //----------------------------Solve the nonlinear problem------------------------------------
         
         t1 = ros::WallTime::now();
-        mynlp.my_solve(xpr,ypr,titapr);
+
+        mynlp.my_solve(xpr,ypr,titapr, dist, ang, yaw, K1, K2, K3);
+
         t2 = ros::WallTime::now();
-        publish_new_path(&transform_listener);
+
+        publish_new_path(&transform_listener, &mynlp);
+        publish_new_actions(&mynlp);
+
+
+
 
         tf = ros::WallTime::now();
-
-        
-
-
         double exec_time = (tf-t0).toNSec()*1e-6;
-        double nlp_time = (t1-t2).toNSec()*1e-6;
+        double nlp_time = (t2-t1).toNSec()*1e-6;
 
         std::cout <<"cylce exec time [ms]: "<<exec_time << "\n";
         std::cout <<"nlp time [ms]: "<<nlp_time << "\n";
