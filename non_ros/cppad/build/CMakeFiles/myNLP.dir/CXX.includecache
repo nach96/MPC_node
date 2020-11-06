@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/inazio/TFG/code/catkin_ws/src/MPC_node/cppad/main.cpp
+iostream
+-
+mynlp.cpp
+/home/inazio/TFG/code/catkin_ws/src/MPC_node/cppad/mynlp.cpp
+
+/home/inazio/TFG/code/catkin_ws/src/MPC_node/cppad/mynlp.cpp
+mynlp.h
+/home/inazio/TFG/code/catkin_ws/src/MPC_node/cppad/mynlp.h
+vector
+-
+
+/home/inazio/TFG/code/catkin_ws/src/MPC_node/cppad/mynlp.h
+vector
+-
+cppad/cppad.hpp
+-
+cppad/ipopt/solve.hpp
+-
+

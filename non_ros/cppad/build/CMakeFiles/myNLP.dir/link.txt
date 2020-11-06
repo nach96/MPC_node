@@ -1,0 +1,1 @@
+/usr/bin/g++    -rdynamic CMakeFiles/myNLP.dir/main.cpp.o  -o myNLP  -L/usr/local/lib -Wl,-rpath,/usr/local/lib -lipopt libmyNLPlib.a 

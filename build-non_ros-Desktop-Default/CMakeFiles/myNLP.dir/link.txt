@@ -1,2 +1,0 @@
-/usr/bin/ar qc libmyNLP.a  CMakeFiles/myNLP.dir/MyNLP.cpp.o
-/usr/bin/ranlib libmyNLP.a

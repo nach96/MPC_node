@@ -157,6 +157,8 @@ int main(int argc, char **argv){
     double K1 = 1.0; //Weight of distance
     double K2 = 1.0; //Weight of ang
     double K3 = 1.0; //Weigth of yaw
+    double K4 = 0.5; //Weigth of yaw
+    double K5 = 0.5; //Weigth of yaw
     double vmax = 1.5;
     double wmax = 0.78;
     n.getParam("distance", dist);
@@ -165,6 +167,8 @@ int main(int argc, char **argv){
     n.getParam("K_distance", K1);
     n.getParam("K_ang", K2);
     n.getParam("K_yaw", K3);
+    n.getParam("K_v", K4);
+    n.getParam("K_w", K5);
     n.getParam("v_max", vmax);
     n.getParam("w_max", wmax);
 
@@ -219,7 +223,13 @@ int main(int argc, char **argv){
         
         t1 = ros::WallTime::now();
 
-        mynlp.my_solve(xpr,ypr,titapr, dist, ang, yaw, K1, K2, K3);
+        if(mynlp.Vr.size()>0){
+            mynlp.my_solve(xpr,ypr,titapr, dist, ang, yaw, K1, K2, K3, K4, K5, mynlp.Vr[0], mynlp.Wr[0]);
+        }else{
+            mynlp.my_solve(xpr,ypr,titapr, dist, ang, yaw, K1, K2, K3, K4, K5, 0.0, 0.0);
+        }
+
+        
 
         t2 = ros::WallTime::now();
 

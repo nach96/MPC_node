@@ -15,9 +15,10 @@ size_t tita_start = y_start + N;
 size_t V_start = tita_start + N;
 size_t W_start = V_start + N-1; //-1 as last actions are not applied
 
-     
+   
+FG_eval::FG_eval(){};
 
-FG_eval::FG_eval(double _xp, double _yp, double _ap, double _dist, double _ang, double _yaw, double _K1, double _K2, double _K3){
+FG_eval::FG_eval(double _xp, double _yp, double _ap, double _dist, double _ang, double _yaw, double _K1, double _K2, double _K3, double _K4, double _K5, double _preV, double _preW){
   xp = _xp;
   yp = _yp;
   ap = _ap;
@@ -27,6 +28,11 @@ FG_eval::FG_eval(double _xp, double _yp, double _ap, double _dist, double _ang, 
   K1 = _K1;
   K2 = _K2;
   K3 = _K3;
+  K4 = _K4;
+  K5 = _K5;
+  preV = _preV;
+  preW = _preW;
+
 }
 
 void FG_eval::operator()(ADvector& fg, const ADvector& x)
@@ -45,7 +51,17 @@ void FG_eval::operator()(ADvector& fg, const ADvector& x)
            fg[0] += K2*CppAD::pow((ap - x[tita_start+i]) - ang,2);
            fg[0] += K3*CppAD::pow(CppAD::atan2(yp-x[y_start+i], xp-x[x_start+i])- yaw -x[tita_start+i],2);
       }
+
+      //Limit first acceleration, relative to previous speed 
+      fg[0] += K4*CppAD::pow( x[V_start]-preV,2 ) + K5*CppAD::pow(x[W_start]-preW,2);  
+      //Limit acceleration
+      for(int i=0;i<N-2; i++){
+        fg[0] += K4*CppAD::pow( (x[V_start+i+1]-x[V_start+i]),2);
+        fg[0] += K5*CppAD::pow( (x[W_start+i+1]-x[W_start+i]),2);
+
+      }
       
+      //g(x)  Constraint equations
     for(int i=1,j=1; i < N; i++,j+=3){
         AD<double> x0 = x[x_start + i -1];
         AD<double> y0 = x[y_start + i -1];
@@ -56,8 +72,6 @@ void FG_eval::operator()(ADvector& fg, const ADvector& x)
         AD<double> x1 = x[x_start + i];
         AD<double> y1 = x[y_start + i];
         AD<double> tita1 = x[tita_start + i];
-
-
 
         fg[j] = x1 - x0 - dt*CppAD::cos(tita0)*V0;
         fg[j+1] = y1 - y0 - dt*CppAD::sin(tita0)*V0;
@@ -70,13 +84,12 @@ void FG_eval::operator()(ADvector& fg, const ADvector& x)
 }
 
 
-
 myNLP::myNLP(double _vmax, double _wmax){
   vmax = _vmax;
   wmax = _wmax;
-}
+}  
 
-void myNLP::my_solve(double xp, double yp, double ap, double dist, double ang, double yaw, double K1, double K2, double K3){
+void myNLP::my_solve(double xp, double yp, double ap, double dist, double ang, double yaw, double K1, double K2, double K3, double K4, double K5, double preV, double preW){
 
     // number of independent variables (domain dimension for f and g)
     size_t nx;
@@ -147,7 +160,7 @@ void myNLP::my_solve(double xp, double yp, double ap, double dist, double ang, d
     }
 
     // object that computes objective and constraints
-    FG_eval fg_eval(xp,yp,ap, dist, ang, yaw, K1, K2, K3);
+    FG_eval fg_eval(xp,yp,ap, dist, ang, yaw, K1, K2, K3, K4, K5, preV, preW);
 
     //std::string options = set_options();
     // options

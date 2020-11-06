@@ -1,5 +1,0 @@
-/home/inazio/TFG/code/Nacho Code/MPC_node/build-non_ros-Desktop-Default/CMakeFiles/rebuild_cache.dir
-/home/inazio/TFG/code/Nacho Code/MPC_node/build-non_ros-Desktop-Default/CMakeFiles/try_matrix.dir
-/home/inazio/TFG/code/Nacho Code/MPC_node/build-non_ros-Desktop-Default/CMakeFiles/myNLP.dir
-/home/inazio/TFG/code/Nacho Code/MPC_node/build-non_ros-Desktop-Default/CMakeFiles/edit_cache.dir
-/home/inazio/TFG/code/Nacho Code/MPC_node/build-non_ros-Desktop-Default/CMakeFiles/ipopt_example.dir

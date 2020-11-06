@@ -1,1 +1,0 @@
-/usr/bin/g++    -rdynamic CMakeFiles/ipopt_example.dir/cpp_example.cpp.o  -o ipopt_example  -L/usr/local/lib -Wl,-rpath,/usr/local/lib libmyNLP.a -lipopt 
