@@ -1,0 +1,168 @@
+\hypertarget{classmyNLP}{}\section{my\+N\+LP Class Reference}
+\label{classmyNLP}\index{my\+N\+LP@{my\+N\+LP}}
+
+
+{\ttfamily \#include $<$mynlp.\+h$>$}
+
+
+
+Collaboration diagram for my\+N\+LP\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classmyNLP__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmyNLP_afc4d8a138c3bfbae32449c4360ef4b16}{my\+N\+LP} (double \+\_\+vmax, double \+\_\+wmax)
+\item 
+void \hyperlink{classmyNLP_ad8eba55aefb5ece257f2c6959aef3f91}{my\+\_\+solve} (double xp, double yp, double ap, double dist, double ang, double yaw, double K1, double K2, double K3, double K4, double K5)
+\item 
+void \hyperlink{classmyNLP_a71acace73426061aef73e43f31396efa}{save\+\_\+solution} (Cpp\+A\+D\+::ipopt\+::solve\+\_\+result$<$ Dvector $>$ \hyperlink{classmyNLP_ab56c3a82e2b58faa2278143b0d014ff2}{solution})
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classmyNLP_a723f46ade7987968c50f5b1dc4044bc8}{Xr}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classmyNLP_af981a9af6b17e3b406faf365898cfd10}{Yr}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classmyNLP_aefab14beb6186061e423865d05645c78}{Titar}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classmyNLP_aeea9f95bdd67cf56e2ec2a79944a3cb9}{Vr}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{classmyNLP_aa3176f5469491b6432f6da85a426957e}{Wr}
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classmyNLP_a1ae02d6ab35595595e960b8571558425}{vmax}
+\item 
+double \hyperlink{classmyNLP_afc3c8ef8ab19ef14565825f779ae104c}{wmax}
+\item 
+\hyperlink{classFG__eval}{F\+G\+\_\+eval} \hyperlink{classmyNLP_ab8a19e8b3a951c8c7dbe8aad6e3ef270}{fgeval}
+\item 
+double \hyperlink{classmyNLP_ad357ad6cc7784e3285cfa90b6dc2cc2e}{preV}
+\item 
+double \hyperlink{classmyNLP_a79269c0f690c30c3127f1453838b72ba}{preW}
+\item 
+Cpp\+A\+D\+::ipopt\+::solve\+\_\+result$<$ Dvector $>$ \hyperlink{classmyNLP_ab56c3a82e2b58faa2278143b0d014ff2}{solution}
+\item 
+double \hyperlink{classmyNLP_a99c70b6afb9e1147bbff6da0d58067ec}{av} = 1$\ast$0.\+1
+\item 
+double \hyperlink{classmyNLP_ae6e75bd5ed3daab0b9d329aed9908095}{aw} = 1$\ast$0.\+1
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classmyNLP_afc4d8a138c3bfbae32449c4360ef4b16}\label{classmyNLP_afc4d8a138c3bfbae32449c4360ef4b16}} 
+\index{my\+N\+LP@{my\+N\+LP}!my\+N\+LP@{my\+N\+LP}}
+\index{my\+N\+LP@{my\+N\+LP}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{my\+N\+L\+P()}{myNLP()}}
+{\footnotesize\ttfamily my\+N\+L\+P\+::my\+N\+LP (\begin{DoxyParamCaption}\item[{double}]{\+\_\+vmax,  }\item[{double}]{\+\_\+wmax }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmyNLP_ad8eba55aefb5ece257f2c6959aef3f91}\label{classmyNLP_ad8eba55aefb5ece257f2c6959aef3f91}} 
+\index{my\+N\+LP@{my\+N\+LP}!my\+\_\+solve@{my\+\_\+solve}}
+\index{my\+\_\+solve@{my\+\_\+solve}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{my\+\_\+solve()}{my\_solve()}}
+{\footnotesize\ttfamily void my\+N\+L\+P\+::my\+\_\+solve (\begin{DoxyParamCaption}\item[{double}]{xp,  }\item[{double}]{yp,  }\item[{double}]{ap,  }\item[{double}]{dist,  }\item[{double}]{ang,  }\item[{double}]{yaw,  }\item[{double}]{K1,  }\item[{double}]{K2,  }\item[{double}]{K3,  }\item[{double}]{K4,  }\item[{double}]{K5 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classmyNLP_a71acace73426061aef73e43f31396efa}\label{classmyNLP_a71acace73426061aef73e43f31396efa}} 
+\index{my\+N\+LP@{my\+N\+LP}!save\+\_\+solution@{save\+\_\+solution}}
+\index{save\+\_\+solution@{save\+\_\+solution}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{save\+\_\+solution()}{save\_solution()}}
+{\footnotesize\ttfamily void my\+N\+L\+P\+::save\+\_\+solution (\begin{DoxyParamCaption}\item[{Cpp\+A\+D\+::ipopt\+::solve\+\_\+result$<$ Dvector $>$}]{solution }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classmyNLP_a99c70b6afb9e1147bbff6da0d58067ec}\label{classmyNLP_a99c70b6afb9e1147bbff6da0d58067ec}} 
+\index{my\+N\+LP@{my\+N\+LP}!av@{av}}
+\index{av@{av}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{av}{av}}
+{\footnotesize\ttfamily double my\+N\+L\+P\+::av = 1$\ast$0.\+1\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classmyNLP_ae6e75bd5ed3daab0b9d329aed9908095}\label{classmyNLP_ae6e75bd5ed3daab0b9d329aed9908095}} 
+\index{my\+N\+LP@{my\+N\+LP}!aw@{aw}}
+\index{aw@{aw}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{aw}{aw}}
+{\footnotesize\ttfamily double my\+N\+L\+P\+::aw = 1$\ast$0.\+1\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classmyNLP_ab8a19e8b3a951c8c7dbe8aad6e3ef270}\label{classmyNLP_ab8a19e8b3a951c8c7dbe8aad6e3ef270}} 
+\index{my\+N\+LP@{my\+N\+LP}!fgeval@{fgeval}}
+\index{fgeval@{fgeval}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{fgeval}{fgeval}}
+{\footnotesize\ttfamily \hyperlink{classFG__eval}{F\+G\+\_\+eval} my\+N\+L\+P\+::fgeval\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classmyNLP_ad357ad6cc7784e3285cfa90b6dc2cc2e}\label{classmyNLP_ad357ad6cc7784e3285cfa90b6dc2cc2e}} 
+\index{my\+N\+LP@{my\+N\+LP}!preV@{preV}}
+\index{preV@{preV}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{preV}{preV}}
+{\footnotesize\ttfamily double my\+N\+L\+P\+::preV\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classmyNLP_a79269c0f690c30c3127f1453838b72ba}\label{classmyNLP_a79269c0f690c30c3127f1453838b72ba}} 
+\index{my\+N\+LP@{my\+N\+LP}!preW@{preW}}
+\index{preW@{preW}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{preW}{preW}}
+{\footnotesize\ttfamily double my\+N\+L\+P\+::preW\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classmyNLP_ab56c3a82e2b58faa2278143b0d014ff2}\label{classmyNLP_ab56c3a82e2b58faa2278143b0d014ff2}} 
+\index{my\+N\+LP@{my\+N\+LP}!solution@{solution}}
+\index{solution@{solution}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{solution}{solution}}
+{\footnotesize\ttfamily Cpp\+A\+D\+::ipopt\+::solve\+\_\+result$<$Dvector$>$ my\+N\+L\+P\+::solution\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classmyNLP_aefab14beb6186061e423865d05645c78}\label{classmyNLP_aefab14beb6186061e423865d05645c78}} 
+\index{my\+N\+LP@{my\+N\+LP}!Titar@{Titar}}
+\index{Titar@{Titar}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{Titar}{Titar}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ my\+N\+L\+P\+::\+Titar}
+
+\mbox{\Hypertarget{classmyNLP_a1ae02d6ab35595595e960b8571558425}\label{classmyNLP_a1ae02d6ab35595595e960b8571558425}} 
+\index{my\+N\+LP@{my\+N\+LP}!vmax@{vmax}}
+\index{vmax@{vmax}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{vmax}{vmax}}
+{\footnotesize\ttfamily double my\+N\+L\+P\+::vmax\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classmyNLP_aeea9f95bdd67cf56e2ec2a79944a3cb9}\label{classmyNLP_aeea9f95bdd67cf56e2ec2a79944a3cb9}} 
+\index{my\+N\+LP@{my\+N\+LP}!Vr@{Vr}}
+\index{Vr@{Vr}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{Vr}{Vr}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ my\+N\+L\+P\+::\+Vr}
+
+\mbox{\Hypertarget{classmyNLP_afc3c8ef8ab19ef14565825f779ae104c}\label{classmyNLP_afc3c8ef8ab19ef14565825f779ae104c}} 
+\index{my\+N\+LP@{my\+N\+LP}!wmax@{wmax}}
+\index{wmax@{wmax}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{wmax}{wmax}}
+{\footnotesize\ttfamily double my\+N\+L\+P\+::wmax\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classmyNLP_aa3176f5469491b6432f6da85a426957e}\label{classmyNLP_aa3176f5469491b6432f6da85a426957e}} 
+\index{my\+N\+LP@{my\+N\+LP}!Wr@{Wr}}
+\index{Wr@{Wr}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{Wr}{Wr}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ my\+N\+L\+P\+::\+Wr}
+
+\mbox{\Hypertarget{classmyNLP_a723f46ade7987968c50f5b1dc4044bc8}\label{classmyNLP_a723f46ade7987968c50f5b1dc4044bc8}} 
+\index{my\+N\+LP@{my\+N\+LP}!Xr@{Xr}}
+\index{Xr@{Xr}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{Xr}{Xr}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ my\+N\+L\+P\+::\+Xr}
+
+\mbox{\Hypertarget{classmyNLP_af981a9af6b17e3b406faf365898cfd10}\label{classmyNLP_af981a9af6b17e3b406faf365898cfd10}} 
+\index{my\+N\+LP@{my\+N\+LP}!Yr@{Yr}}
+\index{Yr@{Yr}!my\+N\+LP@{my\+N\+LP}}
+\subsubsection{\texorpdfstring{Yr}{Yr}}
+{\footnotesize\ttfamily std\+::vector$<$double$>$ my\+N\+L\+P\+::\+Yr}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/inazio/\+T\+F\+G/code/catkin\+\_\+ws/src/mpc\+\_\+node/src/\hyperlink{mynlp_8h}{mynlp.\+h}\item 
+/home/inazio/\+T\+F\+G/code/catkin\+\_\+ws/src/mpc\+\_\+node/src/\hyperlink{mynlp_8cpp}{mynlp.\+cpp}\end{DoxyCompactItemize}

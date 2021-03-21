@@ -1,0 +1,80 @@
+\hypertarget{mynlp_8cpp}{}\section{/home/inazio/\+T\+F\+G/code/catkin\+\_\+ws/src/mpc\+\_\+node/src/mynlp.cpp File Reference}
+\label{mynlp_8cpp}\index{/home/inazio/\+T\+F\+G/code/catkin\+\_\+ws/src/mpc\+\_\+node/src/mynlp.\+cpp@{/home/inazio/\+T\+F\+G/code/catkin\+\_\+ws/src/mpc\+\_\+node/src/mynlp.\+cpp}}
+{\ttfamily \#include \char`\"{}mynlp.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for mynlp.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{mynlp_8cpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{mynlp_8cpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \hyperlink{mynlp_8cpp_aa6d2142329b3b553ce8a778f8239db33}{N} = 10
+\item 
+AD$<$ double $>$ \hyperlink{mynlp_8cpp_a6cb95d1842dea8d8a0ebcf523d9451be}{dt} = 0.\+1
+\item 
+size\+\_\+t \hyperlink{mynlp_8cpp_a3a8a508bade6ce1fe8d51efa0b4b1c13}{x\+\_\+start} = 0
+\item 
+size\+\_\+t \hyperlink{mynlp_8cpp_ab248b1e39ab3bea19bef732655e68902}{y\+\_\+start} = \hyperlink{mynlp_8cpp_a3a8a508bade6ce1fe8d51efa0b4b1c13}{x\+\_\+start} + \hyperlink{mynlp_8cpp_aa6d2142329b3b553ce8a778f8239db33}{N}
+\item 
+size\+\_\+t \hyperlink{mynlp_8cpp_a1e08221d514968bda0e872228f3e07fa}{tita\+\_\+start} = \hyperlink{mynlp_8cpp_ab248b1e39ab3bea19bef732655e68902}{y\+\_\+start} + \hyperlink{mynlp_8cpp_aa6d2142329b3b553ce8a778f8239db33}{N}
+\item 
+size\+\_\+t \hyperlink{mynlp_8cpp_ab813308047cbabde1b1fc4e86c76922f}{V\+\_\+start} = \hyperlink{mynlp_8cpp_a1e08221d514968bda0e872228f3e07fa}{tita\+\_\+start} + \hyperlink{mynlp_8cpp_aa6d2142329b3b553ce8a778f8239db33}{N}
+\item 
+size\+\_\+t \hyperlink{mynlp_8cpp_ad1330d9c6590d7dd45d69276e2e6c58c}{W\+\_\+start} = \hyperlink{mynlp_8cpp_ab813308047cbabde1b1fc4e86c76922f}{V\+\_\+start} + \hyperlink{mynlp_8cpp_aa6d2142329b3b553ce8a778f8239db33}{N}-\/1
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{mynlp_8cpp_a6cb95d1842dea8d8a0ebcf523d9451be}\label{mynlp_8cpp_a6cb95d1842dea8d8a0ebcf523d9451be}} 
+\index{mynlp.\+cpp@{mynlp.\+cpp}!dt@{dt}}
+\index{dt@{dt}!mynlp.\+cpp@{mynlp.\+cpp}}
+\subsubsection{\texorpdfstring{dt}{dt}}
+{\footnotesize\ttfamily AD$<$double$>$ dt = 0.\+1}
+
+\mbox{\Hypertarget{mynlp_8cpp_aa6d2142329b3b553ce8a778f8239db33}\label{mynlp_8cpp_aa6d2142329b3b553ce8a778f8239db33}} 
+\index{mynlp.\+cpp@{mynlp.\+cpp}!N@{N}}
+\index{N@{N}!mynlp.\+cpp@{mynlp.\+cpp}}
+\subsubsection{\texorpdfstring{N}{N}}
+{\footnotesize\ttfamily size\+\_\+t N = 10}
+
+\mbox{\Hypertarget{mynlp_8cpp_a1e08221d514968bda0e872228f3e07fa}\label{mynlp_8cpp_a1e08221d514968bda0e872228f3e07fa}} 
+\index{mynlp.\+cpp@{mynlp.\+cpp}!tita\+\_\+start@{tita\+\_\+start}}
+\index{tita\+\_\+start@{tita\+\_\+start}!mynlp.\+cpp@{mynlp.\+cpp}}
+\subsubsection{\texorpdfstring{tita\+\_\+start}{tita\_start}}
+{\footnotesize\ttfamily size\+\_\+t tita\+\_\+start = \hyperlink{mynlp_8cpp_ab248b1e39ab3bea19bef732655e68902}{y\+\_\+start} + \hyperlink{mynlp_8cpp_aa6d2142329b3b553ce8a778f8239db33}{N}}
+
+\mbox{\Hypertarget{mynlp_8cpp_ab813308047cbabde1b1fc4e86c76922f}\label{mynlp_8cpp_ab813308047cbabde1b1fc4e86c76922f}} 
+\index{mynlp.\+cpp@{mynlp.\+cpp}!V\+\_\+start@{V\+\_\+start}}
+\index{V\+\_\+start@{V\+\_\+start}!mynlp.\+cpp@{mynlp.\+cpp}}
+\subsubsection{\texorpdfstring{V\+\_\+start}{V\_start}}
+{\footnotesize\ttfamily size\+\_\+t V\+\_\+start = \hyperlink{mynlp_8cpp_a1e08221d514968bda0e872228f3e07fa}{tita\+\_\+start} + \hyperlink{mynlp_8cpp_aa6d2142329b3b553ce8a778f8239db33}{N}}
+
+\mbox{\Hypertarget{mynlp_8cpp_ad1330d9c6590d7dd45d69276e2e6c58c}\label{mynlp_8cpp_ad1330d9c6590d7dd45d69276e2e6c58c}} 
+\index{mynlp.\+cpp@{mynlp.\+cpp}!W\+\_\+start@{W\+\_\+start}}
+\index{W\+\_\+start@{W\+\_\+start}!mynlp.\+cpp@{mynlp.\+cpp}}
+\subsubsection{\texorpdfstring{W\+\_\+start}{W\_start}}
+{\footnotesize\ttfamily size\+\_\+t W\+\_\+start = \hyperlink{mynlp_8cpp_ab813308047cbabde1b1fc4e86c76922f}{V\+\_\+start} + \hyperlink{mynlp_8cpp_aa6d2142329b3b553ce8a778f8239db33}{N}-\/1}
+
+\mbox{\Hypertarget{mynlp_8cpp_a3a8a508bade6ce1fe8d51efa0b4b1c13}\label{mynlp_8cpp_a3a8a508bade6ce1fe8d51efa0b4b1c13}} 
+\index{mynlp.\+cpp@{mynlp.\+cpp}!x\+\_\+start@{x\+\_\+start}}
+\index{x\+\_\+start@{x\+\_\+start}!mynlp.\+cpp@{mynlp.\+cpp}}
+\subsubsection{\texorpdfstring{x\+\_\+start}{x\_start}}
+{\footnotesize\ttfamily size\+\_\+t x\+\_\+start = 0}
+
+\mbox{\Hypertarget{mynlp_8cpp_ab248b1e39ab3bea19bef732655e68902}\label{mynlp_8cpp_ab248b1e39ab3bea19bef732655e68902}} 
+\index{mynlp.\+cpp@{mynlp.\+cpp}!y\+\_\+start@{y\+\_\+start}}
+\index{y\+\_\+start@{y\+\_\+start}!mynlp.\+cpp@{mynlp.\+cpp}}
+\subsubsection{\texorpdfstring{y\+\_\+start}{y\_start}}
+{\footnotesize\ttfamily size\+\_\+t y\+\_\+start = \hyperlink{mynlp_8cpp_a3a8a508bade6ce1fe8d51efa0b4b1c13}{x\+\_\+start} + \hyperlink{mynlp_8cpp_aa6d2142329b3b553ce8a778f8239db33}{N}}
+

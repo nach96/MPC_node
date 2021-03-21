@@ -1,23 +1,34 @@
 <?xml version="1.0"?>
 <launch>
 
-	<param name="distance" type="double" value="1.0" />
+	<param name="distance" type="double" value="2.0" />
 	<param name="angle_tita" type="double" value="0.0" />
-	<param name="yaw" type="double" value="-1.57" />
-	<param name="K_distance" type="double" value="3.0" />
-	<param name="K_ang" type="double" value="0.5" />
+	<param name="yaw" type="double" value="3.1416" />
+	<param name="K_distance" type="double" value="1.0" />
+	<param name="K_ang" type="double" value="1.0" />
 	<param name="K_yaw" type="double" value="1.0" />
-	<param name="K_v" type="double" value="0.3" />
-	<param name="K_w" type="double" value="0.3" />
-	<param name="v_max" type="double" value="1.5" />
+	<param name="K_v" type="double" value="0.2" />
+	<param name="K_w" type="double" value="0.2" />
+	<param name="v_max" type="double" value="1.0" />
 	<param name="w_max" type="double" value="0.78" />
+	<param name="useGroundTruth" type="bool" value="false" />
+
 	
- 
-  <node name="mpc_node" pkg="mpc_node" type="mpc_node" output="screen">
-	
-	
-	
+ <!--
+   <include file="$(find simulation)/launch/stage/stage-2-robots-empty.launch">   </include>
+
+   <include file="$(find simulation)/launch/control-2-robots-empty.launch">   </include>
+-->
+
+  <node 
+  	name="mpc_node" pkg="mpc_node" type="mpc_node" output="screen">
   </node>
+
+  <node 
+  	name="obj_node" pkg="mpc_node" type="obj_node" output="screen">
+  </node>
+
+
 
 
 

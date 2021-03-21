@@ -34,6 +34,7 @@ private:
   AD<double> yaw;// = -1.57; //[rad]
   AD<double> preV;
   AD<double> preW;
+  
 
 };
 
@@ -51,7 +52,7 @@ class myNLP
 {
 public:
     myNLP(double _vmax, double _wmax);
-    void my_solve(double xp, double yp, double ap,double dist, double ang, double yaw, double K1, double K2, double K3, double K4, double K5, double preV, double preW);
+    void my_solve(double xp, double yp, double ap,double dist, double ang, double yaw, double K1, double K2, double K3, double K4, double K5);
     void save_solution(CppAD::ipopt::solve_result<Dvector> solution);
     //std::string set_options(void);
     //void set_limits(Dvector x_l, Dvector x_u, Dvector g_l, Dvector g_u);
@@ -66,6 +67,12 @@ private:
     double vmax; // = 1.5;//E3; //[mm/s]
     double wmax; // = 0.78; //[rad/s]
     FG_eval fgeval;
+    double preV;
+    double preW;
+    // place to return solution
+    CppAD::ipopt::solve_result<Dvector> solution;
+    double av = 1*0.1;
+    double aw = 1*0.1;
 
    
 

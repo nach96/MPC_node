@@ -123,15 +123,20 @@ CATKIN_DEPENDS roscpp rospy std_msgs message_runtime geometry_msgs
 ## Your package locations should be listed before other locations
 set(IPOPT_LIBRARY_DIRS /usr/local/lib)
 set(IPOPT_INCLUDE_DIRS /usr/local/include/coin-or)
+#set(CPPAD_LIB_DIR  ${CMAKE_SOURCE_DIR}/include)
 
 include_directories(
 # include
  ${catkin_INCLUDE_DIRS}
  ${IPOPT_INCLUDE_DIRS}
  ${CMAKE_SOURCE_DIR}/include
+
+
 )
 
-link_directories(${IPOPT_LIBRARY_DIRS})
+link_directories(
+    ${IPOPT_LIBRARY_DIRS} 
+    )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
@@ -139,6 +144,7 @@ link_directories(${IPOPT_LIBRARY_DIRS})
 # )
 
 add_library(myNLPlib src/mynlp.cpp)
+add_library(myMPClib src/mpc_node.cpp)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -165,6 +171,7 @@ add_library(myNLPlib src/mynlp.cpp)
 #   ${catkin_LIBRARIES}
 # )
 target_link_libraries(myNLPlib ipopt)
+
 
 
 
@@ -224,10 +231,25 @@ target_link_libraries(myNLPlib ipopt)
 # catkin_add_nosetests(test)
 
 
-
+#########################
+## MPC_node
+#########################
 add_executable(${PROJECT_NAME} src/MPC_main.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} myNLPlib)
+target_link_libraries(${PROJECT_NAME} myMPClib)
+
+#########################
+## MPC_node
+#########################
+add_executable(obj_node src/move_objective.cpp)
+target_link_libraries(obj_node ${catkin_LIBRARIES})
+
+
+#Giving install commands as step to create snap.
+#install(TARGETS ${PROJECT_NAME}
+#	RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+#)
 
 
 

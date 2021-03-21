@@ -40,3 +40,6 @@ for j=2:1:length(X)
     end
     i0=i0+10;
 end
+
+%Simulation RK2
+

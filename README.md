@@ -3,3 +3,15 @@ ROS MPC node based on IpOpt and CppAD library for differential drive robot follo
 -Distance
 -Perspective
 -Relative angle
+
+Workflow for simulation:
+-roscore
+-roslaunch simulation stage-2-robots-empty.launch    (launches stage world)
+-roslaunch simulation control-2-robots-empty.launch  (Optional. Can be skiped if you provide velocities directly)
+-roslaunch mpc_node mpc-node-2-robots-MPC.launch     (MPC control of the robot)
+
+*Debugging and visualization:
+
+-rqt_bag   		(Save topics publsihed in a bagfile)
+-PlotJuggler  		(Plot timeseries data easily. Online or from bagfile. Can re-publish the topics for rviz)
+-rosrun rviz rviz	(Visualization of data over map)

@@ -1,0 +1,325 @@
+\hypertarget{classMpc__node}{}\section{Mpc\+\_\+node Class Reference}
+\label{classMpc__node}\index{Mpc\+\_\+node@{Mpc\+\_\+node}}
+
+
+{\ttfamily \#include $<$mpc\+\_\+node.\+hpp$>$}
+
+
+
+Collaboration diagram for Mpc\+\_\+node\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classMpc__node__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classMpc__node_a708cd33f3a41aac19d767879d1dc0cd7}{pose0\+\_\+callback} (geometry\+\_\+msgs\+::\+Pose\+With\+Covariance\+Stamped pose)
+\item 
+void \hyperlink{classMpc__node_a4f389e33d9374ed2d18f58125035a0e4}{pose1\+\_\+callback} (geometry\+\_\+msgs\+::\+Pose\+With\+Covariance\+Stamped pose)
+\item 
+void \hyperlink{classMpc__node_ab55c31f17c32c247adbcee5aae40c128}{calculate\+\_\+fake\+\_\+path} (double \+\_\+xr, double \+\_\+yr, double \+\_\+wr, double \+\_\+xp, double \+\_\+yp, double \+\_\+wp)
+\item 
+void \hyperlink{classMpc__node_a16734474d794c1896aebd9a008b96611}{publish\+\_\+new\+\_\+path} (tf\+::\+Transform\+Listener $\ast$\hyperlink{classMpc__node_acca5492f6ed78d47688621941d11d1b2}{transform\+\_\+listener}, \hyperlink{classmyNLP}{my\+N\+LP} $\ast$\hyperlink{classMpc__node_a5a7534e2aaa1e1003d4c710589e07590}{mynlp})
+\item 
+void \hyperlink{classMpc__node_a97467f6ef0d64235da935823cfd4bd47}{publish\+\_\+new\+\_\+actions} (\hyperlink{classmyNLP}{my\+N\+LP} $\ast$\hyperlink{classMpc__node_a5a7534e2aaa1e1003d4c710589e07590}{mynlp})
+\item 
+void \hyperlink{classMpc__node_ab607a3c4dfa4ebf571a60c93049e3309}{get\+\_\+parameters} ()
+\item 
+void \hyperlink{classMpc__node_a788f17ed756892727cf04adf1a485677}{control\+\_\+loop} ()
+\item 
+\hyperlink{classMpc__node_aecd75162dde3b8750c37e0b85a036097}{Mpc\+\_\+node} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ros\+::\+Node\+Handle \hyperlink{classMpc__node_a6d876c2baef47329ce66b8747b918eb4}{n}
+\item 
+ros\+::\+Rate \hyperlink{classMpc__node_accb78ea73903c0a6164b794d0450a0b0}{rate}
+\item 
+ros\+::\+Publisher \hyperlink{classMpc__node_a4c51498e7db8875e951c637e891b5e62}{pub\+Path}
+\item 
+ros\+::\+Publisher \hyperlink{classMpc__node_a4191433cb5c29c422a6ac11abfb2c08f}{pubV}
+\item 
+ros\+::\+Subscriber \hyperlink{classMpc__node_a97fdf7b8912632aac250aeb4a515d38f}{sub\+Pose0}
+\item 
+ros\+::\+Subscriber \hyperlink{classMpc__node_aec569d4ea7254ec9893ce79b94ce2eba}{sub\+Pose1}
+\item 
+tf\+::\+Transform\+Listener \hyperlink{classMpc__node_acca5492f6ed78d47688621941d11d1b2}{transform\+\_\+listener}
+\item 
+tf\+::\+Stamped\+Transform \hyperlink{classMpc__node_a8688cf07e5ddc56acf1448503b3f5984}{R\+T\+\_\+person\+\_\+robot}
+\item 
+ros\+::\+Time \hyperlink{classMpc__node_a5412f969d238133ee5a5a40928811932}{time\+\_\+start}
+\item 
+nav\+\_\+msgs\+::\+Path \hyperlink{classMpc__node_a6da2728783a52910d4c378a3f66aec06}{path}
+\item 
+double \hyperlink{classMpc__node_a28803c0f092db658637ece996aad7e90}{dist} = 3.\+0
+\item 
+double \hyperlink{classMpc__node_a44c011b9b0c84002f5e9cb057c9a2d59}{ang} = 0.\+0
+\item 
+double \hyperlink{classMpc__node_a9b5da0aaf367d5b1f60f47eca976de2a}{yaw} = -\/1.\+57
+\item 
+double \hyperlink{classMpc__node_a5c4d6221612047ebd47b0c0fe462db67}{K1} = 1.\+0
+\item 
+double \hyperlink{classMpc__node_a78c903e351af27fd9e4b92c2a4d40210}{K2} = 1.\+0
+\item 
+double \hyperlink{classMpc__node_a4a889c942598f48d5ec29f45e7c98478}{K3} = 1.\+0
+\item 
+double \hyperlink{classMpc__node_a0b2df940218a00cdfbedb434bb108d5a}{K4} = 0.\+5
+\item 
+double \hyperlink{classMpc__node_a893fd885d574e00cbe38cbcd06079aca}{K5} = 0.\+5
+\item 
+double \hyperlink{classMpc__node_a1d0e857050592ddf6afa764a74a03f4a}{vmax} = 1.\+5
+\item 
+double \hyperlink{classMpc__node_a85d68b460b951590985a52dabdb0ba4b}{wmax} = 0.\+78
+\item 
+bool \hyperlink{classMpc__node_a4ac01e38cecc492097d9fabd33afab8d}{use\+Ground\+Truth} = false
+\item 
+\hyperlink{classmyNLP}{my\+N\+LP} \hyperlink{classMpc__node_a5a7534e2aaa1e1003d4c710589e07590}{mynlp}
+\item 
+double \hyperlink{classMpc__node_a5e3e13f0270d4e8c3555c60a3a9b5356}{xr}
+\item 
+double \hyperlink{classMpc__node_a93c8464ce2e0446c7463bad6a52ee8a1}{yr}
+\item 
+double \hyperlink{classMpc__node_a78f2cb060ecee1c0be22b9b59fb0638e}{titar}
+\item 
+double \hyperlink{classMpc__node_aeb6d97153be787995ddefaa9839e09c0}{xp}
+\item 
+double \hyperlink{classMpc__node_adb9780e9f20aa698a68fbc632b8e4f46}{yp}
+\item 
+double \hyperlink{classMpc__node_ad599feb3182645b6359b6bb16055fcb8}{titap}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMpc__node_aecd75162dde3b8750c37e0b85a036097}\label{classMpc__node_aecd75162dde3b8750c37e0b85a036097}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{Mpc\+\_\+node()}{Mpc\_node()}}
+{\footnotesize\ttfamily Mpc\+\_\+node\+::\+Mpc\+\_\+node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMpc__node_ab55c31f17c32c247adbcee5aae40c128}\label{classMpc__node_ab55c31f17c32c247adbcee5aae40c128}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!calculate\+\_\+fake\+\_\+path@{calculate\+\_\+fake\+\_\+path}}
+\index{calculate\+\_\+fake\+\_\+path@{calculate\+\_\+fake\+\_\+path}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{calculate\+\_\+fake\+\_\+path()}{calculate\_fake\_path()}}
+{\footnotesize\ttfamily void Mpc\+\_\+node\+::calculate\+\_\+fake\+\_\+path (\begin{DoxyParamCaption}\item[{double}]{\+\_\+xr,  }\item[{double}]{\+\_\+yr,  }\item[{double}]{\+\_\+wr,  }\item[{double}]{\+\_\+xp,  }\item[{double}]{\+\_\+yp,  }\item[{double}]{\+\_\+wp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMpc__node_a788f17ed756892727cf04adf1a485677}\label{classMpc__node_a788f17ed756892727cf04adf1a485677}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!control\+\_\+loop@{control\+\_\+loop}}
+\index{control\+\_\+loop@{control\+\_\+loop}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{control\+\_\+loop()}{control\_loop()}}
+{\footnotesize\ttfamily void Mpc\+\_\+node\+::control\+\_\+loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMpc__node_ab607a3c4dfa4ebf571a60c93049e3309}\label{classMpc__node_ab607a3c4dfa4ebf571a60c93049e3309}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!get\+\_\+parameters@{get\+\_\+parameters}}
+\index{get\+\_\+parameters@{get\+\_\+parameters}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{get\+\_\+parameters()}{get\_parameters()}}
+{\footnotesize\ttfamily void Mpc\+\_\+node\+::get\+\_\+parameters (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMpc__node_a708cd33f3a41aac19d767879d1dc0cd7}\label{classMpc__node_a708cd33f3a41aac19d767879d1dc0cd7}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!pose0\+\_\+callback@{pose0\+\_\+callback}}
+\index{pose0\+\_\+callback@{pose0\+\_\+callback}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{pose0\+\_\+callback()}{pose0\_callback()}}
+{\footnotesize\ttfamily void Mpc\+\_\+node\+::pose0\+\_\+callback (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Pose\+With\+Covariance\+Stamped}]{pose }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMpc__node_a4f389e33d9374ed2d18f58125035a0e4}\label{classMpc__node_a4f389e33d9374ed2d18f58125035a0e4}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!pose1\+\_\+callback@{pose1\+\_\+callback}}
+\index{pose1\+\_\+callback@{pose1\+\_\+callback}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{pose1\+\_\+callback()}{pose1\_callback()}}
+{\footnotesize\ttfamily void Mpc\+\_\+node\+::pose1\+\_\+callback (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Pose\+With\+Covariance\+Stamped}]{pose }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMpc__node_a97467f6ef0d64235da935823cfd4bd47}\label{classMpc__node_a97467f6ef0d64235da935823cfd4bd47}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!publish\+\_\+new\+\_\+actions@{publish\+\_\+new\+\_\+actions}}
+\index{publish\+\_\+new\+\_\+actions@{publish\+\_\+new\+\_\+actions}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{publish\+\_\+new\+\_\+actions()}{publish\_new\_actions()}}
+{\footnotesize\ttfamily void Mpc\+\_\+node\+::publish\+\_\+new\+\_\+actions (\begin{DoxyParamCaption}\item[{\hyperlink{classmyNLP}{my\+N\+LP} $\ast$}]{mynlp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classMpc__node_a16734474d794c1896aebd9a008b96611}\label{classMpc__node_a16734474d794c1896aebd9a008b96611}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!publish\+\_\+new\+\_\+path@{publish\+\_\+new\+\_\+path}}
+\index{publish\+\_\+new\+\_\+path@{publish\+\_\+new\+\_\+path}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{publish\+\_\+new\+\_\+path()}{publish\_new\_path()}}
+{\footnotesize\ttfamily void Mpc\+\_\+node\+::publish\+\_\+new\+\_\+path (\begin{DoxyParamCaption}\item[{tf\+::\+Transform\+Listener $\ast$}]{transform\+\_\+listener,  }\item[{\hyperlink{classmyNLP}{my\+N\+LP} $\ast$}]{mynlp }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classMpc__node_a44c011b9b0c84002f5e9cb057c9a2d59}\label{classMpc__node_a44c011b9b0c84002f5e9cb057c9a2d59}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!ang@{ang}}
+\index{ang@{ang}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{ang}{ang}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::ang = 0.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a28803c0f092db658637ece996aad7e90}\label{classMpc__node_a28803c0f092db658637ece996aad7e90}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!dist@{dist}}
+\index{dist@{dist}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{dist}{dist}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::dist = 3.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a5c4d6221612047ebd47b0c0fe462db67}\label{classMpc__node_a5c4d6221612047ebd47b0c0fe462db67}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!K1@{K1}}
+\index{K1@{K1}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{K1}{K1}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::\+K1 = 1.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a78c903e351af27fd9e4b92c2a4d40210}\label{classMpc__node_a78c903e351af27fd9e4b92c2a4d40210}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!K2@{K2}}
+\index{K2@{K2}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{K2}{K2}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::\+K2 = 1.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a4a889c942598f48d5ec29f45e7c98478}\label{classMpc__node_a4a889c942598f48d5ec29f45e7c98478}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!K3@{K3}}
+\index{K3@{K3}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{K3}{K3}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::\+K3 = 1.\+0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a0b2df940218a00cdfbedb434bb108d5a}\label{classMpc__node_a0b2df940218a00cdfbedb434bb108d5a}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!K4@{K4}}
+\index{K4@{K4}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{K4}{K4}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::\+K4 = 0.\+5\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a893fd885d574e00cbe38cbcd06079aca}\label{classMpc__node_a893fd885d574e00cbe38cbcd06079aca}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!K5@{K5}}
+\index{K5@{K5}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{K5}{K5}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::\+K5 = 0.\+5\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a5a7534e2aaa1e1003d4c710589e07590}\label{classMpc__node_a5a7534e2aaa1e1003d4c710589e07590}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!mynlp@{mynlp}}
+\index{mynlp@{mynlp}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{mynlp}{mynlp}}
+{\footnotesize\ttfamily \hyperlink{classmyNLP}{my\+N\+LP} Mpc\+\_\+node\+::mynlp\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a6d876c2baef47329ce66b8747b918eb4}\label{classMpc__node_a6d876c2baef47329ce66b8747b918eb4}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!n@{n}}
+\index{n@{n}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily ros\+::\+Node\+Handle Mpc\+\_\+node\+::n\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a6da2728783a52910d4c378a3f66aec06}\label{classMpc__node_a6da2728783a52910d4c378a3f66aec06}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!path@{path}}
+\index{path@{path}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{path}{path}}
+{\footnotesize\ttfamily nav\+\_\+msgs\+::\+Path Mpc\+\_\+node\+::path\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a4c51498e7db8875e951c637e891b5e62}\label{classMpc__node_a4c51498e7db8875e951c637e891b5e62}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!pub\+Path@{pub\+Path}}
+\index{pub\+Path@{pub\+Path}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{pub\+Path}{pubPath}}
+{\footnotesize\ttfamily ros\+::\+Publisher Mpc\+\_\+node\+::pub\+Path\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a4191433cb5c29c422a6ac11abfb2c08f}\label{classMpc__node_a4191433cb5c29c422a6ac11abfb2c08f}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!pubV@{pubV}}
+\index{pubV@{pubV}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{pubV}{pubV}}
+{\footnotesize\ttfamily ros\+::\+Publisher Mpc\+\_\+node\+::pubV\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_accb78ea73903c0a6164b794d0450a0b0}\label{classMpc__node_accb78ea73903c0a6164b794d0450a0b0}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!rate@{rate}}
+\index{rate@{rate}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{rate}{rate}}
+{\footnotesize\ttfamily ros\+::\+Rate Mpc\+\_\+node\+::rate\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a8688cf07e5ddc56acf1448503b3f5984}\label{classMpc__node_a8688cf07e5ddc56acf1448503b3f5984}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!R\+T\+\_\+person\+\_\+robot@{R\+T\+\_\+person\+\_\+robot}}
+\index{R\+T\+\_\+person\+\_\+robot@{R\+T\+\_\+person\+\_\+robot}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{R\+T\+\_\+person\+\_\+robot}{RT\_person\_robot}}
+{\footnotesize\ttfamily tf\+::\+Stamped\+Transform Mpc\+\_\+node\+::\+R\+T\+\_\+person\+\_\+robot\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a97fdf7b8912632aac250aeb4a515d38f}\label{classMpc__node_a97fdf7b8912632aac250aeb4a515d38f}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!sub\+Pose0@{sub\+Pose0}}
+\index{sub\+Pose0@{sub\+Pose0}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{sub\+Pose0}{subPose0}}
+{\footnotesize\ttfamily ros\+::\+Subscriber Mpc\+\_\+node\+::sub\+Pose0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_aec569d4ea7254ec9893ce79b94ce2eba}\label{classMpc__node_aec569d4ea7254ec9893ce79b94ce2eba}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!sub\+Pose1@{sub\+Pose1}}
+\index{sub\+Pose1@{sub\+Pose1}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{sub\+Pose1}{subPose1}}
+{\footnotesize\ttfamily ros\+::\+Subscriber Mpc\+\_\+node\+::sub\+Pose1\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a5412f969d238133ee5a5a40928811932}\label{classMpc__node_a5412f969d238133ee5a5a40928811932}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!time\+\_\+start@{time\+\_\+start}}
+\index{time\+\_\+start@{time\+\_\+start}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{time\+\_\+start}{time\_start}}
+{\footnotesize\ttfamily ros\+::\+Time Mpc\+\_\+node\+::time\+\_\+start\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_ad599feb3182645b6359b6bb16055fcb8}\label{classMpc__node_ad599feb3182645b6359b6bb16055fcb8}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!titap@{titap}}
+\index{titap@{titap}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{titap}{titap}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::titap\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a78f2cb060ecee1c0be22b9b59fb0638e}\label{classMpc__node_a78f2cb060ecee1c0be22b9b59fb0638e}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!titar@{titar}}
+\index{titar@{titar}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{titar}{titar}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::titar\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_acca5492f6ed78d47688621941d11d1b2}\label{classMpc__node_acca5492f6ed78d47688621941d11d1b2}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!transform\+\_\+listener@{transform\+\_\+listener}}
+\index{transform\+\_\+listener@{transform\+\_\+listener}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{transform\+\_\+listener}{transform\_listener}}
+{\footnotesize\ttfamily tf\+::\+Transform\+Listener Mpc\+\_\+node\+::transform\+\_\+listener\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a4ac01e38cecc492097d9fabd33afab8d}\label{classMpc__node_a4ac01e38cecc492097d9fabd33afab8d}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!use\+Ground\+Truth@{use\+Ground\+Truth}}
+\index{use\+Ground\+Truth@{use\+Ground\+Truth}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{use\+Ground\+Truth}{useGroundTruth}}
+{\footnotesize\ttfamily bool Mpc\+\_\+node\+::use\+Ground\+Truth = false\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a1d0e857050592ddf6afa764a74a03f4a}\label{classMpc__node_a1d0e857050592ddf6afa764a74a03f4a}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!vmax@{vmax}}
+\index{vmax@{vmax}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{vmax}{vmax}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::vmax = 1.\+5\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a85d68b460b951590985a52dabdb0ba4b}\label{classMpc__node_a85d68b460b951590985a52dabdb0ba4b}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!wmax@{wmax}}
+\index{wmax@{wmax}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{wmax}{wmax}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::wmax = 0.\+78\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_aeb6d97153be787995ddefaa9839e09c0}\label{classMpc__node_aeb6d97153be787995ddefaa9839e09c0}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!xp@{xp}}
+\index{xp@{xp}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{xp}{xp}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::xp\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a5e3e13f0270d4e8c3555c60a3a9b5356}\label{classMpc__node_a5e3e13f0270d4e8c3555c60a3a9b5356}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!xr@{xr}}
+\index{xr@{xr}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{xr}{xr}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::xr\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a9b5da0aaf367d5b1f60f47eca976de2a}\label{classMpc__node_a9b5da0aaf367d5b1f60f47eca976de2a}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!yaw@{yaw}}
+\index{yaw@{yaw}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{yaw}{yaw}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::yaw = -\/1.\+57\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_adb9780e9f20aa698a68fbc632b8e4f46}\label{classMpc__node_adb9780e9f20aa698a68fbc632b8e4f46}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!yp@{yp}}
+\index{yp@{yp}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{yp}{yp}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::yp\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classMpc__node_a93c8464ce2e0446c7463bad6a52ee8a1}\label{classMpc__node_a93c8464ce2e0446c7463bad6a52ee8a1}} 
+\index{Mpc\+\_\+node@{Mpc\+\_\+node}!yr@{yr}}
+\index{yr@{yr}!Mpc\+\_\+node@{Mpc\+\_\+node}}
+\subsubsection{\texorpdfstring{yr}{yr}}
+{\footnotesize\ttfamily double Mpc\+\_\+node\+::yr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/inazio/\+T\+F\+G/code/catkin\+\_\+ws/src/mpc\+\_\+node/src/\hyperlink{mpc__node_8hpp}{mpc\+\_\+node.\+hpp}\item 
+/home/inazio/\+T\+F\+G/code/catkin\+\_\+ws/src/mpc\+\_\+node/src/\hyperlink{mpc__node_8cpp}{mpc\+\_\+node.\+cpp}\end{DoxyCompactItemize}

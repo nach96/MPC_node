@@ -1,0 +1,173 @@
+\hypertarget{classFG__eval}{}\section{F\+G\+\_\+eval Class Reference}
+\label{classFG__eval}\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+
+
+{\ttfamily \#include $<$mynlp.\+h$>$}
+
+
+
+Collaboration diagram for F\+G\+\_\+eval\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classFG__eval__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+typedef \hyperlink{classFG__eval_aa996df77a971dedd5d5715ef6be1258e}{C\+P\+P\+A\+D\+\_\+\+T\+E\+S\+T\+V\+E\+C\+T\+OR} (AD$<$ double $>$) A\+Dvector
+\item 
+\hyperlink{classFG__eval_a0a9e41e75d2ab3597a535a73b2a30ede}{F\+G\+\_\+eval} ()
+\item 
+\hyperlink{classFG__eval_af179064157f6328d47b2ce44c2d30a3e}{F\+G\+\_\+eval} (double \+\_\+xp, double \+\_\+yp, double \+\_\+ap, double \+\_\+dist, double \+\_\+ang, double \+\_\+yaw, double \+\_\+\+K1, double \+\_\+\+K2, double \+\_\+\+K3, double \+\_\+\+K4, double \+\_\+\+K5, double \+\_\+preV, double \+\_\+preW)
+\item 
+void \hyperlink{classFG__eval_ae4a15abb127b46d10bca1f1619faf248}{operator()} (A\+Dvector \&fg, const A\+Dvector \&x)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classFG__eval_ae37d43302e8c2f0768e0903afdc4dec5}{xp}
+\item 
+double \hyperlink{classFG__eval_a8df0b0ddcb354b68551c11a1788a9b6e}{yp}
+\item 
+double \hyperlink{classFG__eval_a8cea35a0a3b58c8dc7cc9be19a1e9013}{ap}
+\item 
+AD$<$ double $>$ \hyperlink{classFG__eval_a5dcf5982e81dceca40b4bc474827b5aa}{K1}
+\item 
+AD$<$ double $>$ \hyperlink{classFG__eval_af671d3c7db3b17c2a6fda4798b402320}{K2}
+\item 
+AD$<$ double $>$ \hyperlink{classFG__eval_a6afb8dacd318791bdad27da2649ff618}{K3}
+\item 
+AD$<$ double $>$ \hyperlink{classFG__eval_a45479bca30dc7f49625d0d05fd17bc7c}{K4}
+\item 
+AD$<$ double $>$ \hyperlink{classFG__eval_a969e08a07221e37ccce7ec008aea7356}{K5}
+\item 
+AD$<$ double $>$ \hyperlink{classFG__eval_a679badb474e00e9d169f1bdc24657129}{dist}
+\item 
+AD$<$ double $>$ \hyperlink{classFG__eval_a9e9644f7d9759e9fc3babf41d658cbf7}{ang}
+\item 
+AD$<$ double $>$ \hyperlink{classFG__eval_a6ce3987053540554a0287422fb4f5ce2}{yaw}
+\item 
+AD$<$ double $>$ \hyperlink{classFG__eval_ab24a3bc79de568dd46827959993a7dc6}{preV}
+\item 
+AD$<$ double $>$ \hyperlink{classFG__eval_a2efce268a9d4e915e8cd6f670bf80217}{preW}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classFG__eval_a0a9e41e75d2ab3597a535a73b2a30ede}\label{classFG__eval_a0a9e41e75d2ab3597a535a73b2a30ede}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{F\+G\+\_\+eval()}{FG\_eval()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily F\+G\+\_\+eval\+::\+F\+G\+\_\+eval (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classFG__eval_af179064157f6328d47b2ce44c2d30a3e}\label{classFG__eval_af179064157f6328d47b2ce44c2d30a3e}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{F\+G\+\_\+eval()}{FG\_eval()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily F\+G\+\_\+eval\+::\+F\+G\+\_\+eval (\begin{DoxyParamCaption}\item[{double}]{\+\_\+xp,  }\item[{double}]{\+\_\+yp,  }\item[{double}]{\+\_\+ap,  }\item[{double}]{\+\_\+dist,  }\item[{double}]{\+\_\+ang,  }\item[{double}]{\+\_\+yaw,  }\item[{double}]{\+\_\+\+K1,  }\item[{double}]{\+\_\+\+K2,  }\item[{double}]{\+\_\+\+K3,  }\item[{double}]{\+\_\+\+K4,  }\item[{double}]{\+\_\+\+K5,  }\item[{double}]{\+\_\+preV,  }\item[{double}]{\+\_\+preW }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classFG__eval_aa996df77a971dedd5d5715ef6be1258e}\label{classFG__eval_aa996df77a971dedd5d5715ef6be1258e}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!C\+P\+P\+A\+D\+\_\+\+T\+E\+S\+T\+V\+E\+C\+T\+OR@{C\+P\+P\+A\+D\+\_\+\+T\+E\+S\+T\+V\+E\+C\+T\+OR}}
+\index{C\+P\+P\+A\+D\+\_\+\+T\+E\+S\+T\+V\+E\+C\+T\+OR@{C\+P\+P\+A\+D\+\_\+\+T\+E\+S\+T\+V\+E\+C\+T\+OR}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{C\+P\+P\+A\+D\+\_\+\+T\+E\+S\+T\+V\+E\+C\+T\+O\+R()}{CPPAD\_TESTVECTOR()}}
+{\footnotesize\ttfamily typedef F\+G\+\_\+eval\+::\+C\+P\+P\+A\+D\+\_\+\+T\+E\+S\+T\+V\+E\+C\+T\+OR (\begin{DoxyParamCaption}\item[{AD$<$ double $>$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classFG__eval_ae4a15abb127b46d10bca1f1619faf248}\label{classFG__eval_ae4a15abb127b46d10bca1f1619faf248}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!operator()@{operator()}}
+\index{operator()@{operator()}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily void F\+G\+\_\+eval\+::operator() (\begin{DoxyParamCaption}\item[{A\+Dvector \&}]{fg,  }\item[{const A\+Dvector \&}]{x }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classFG__eval_a9e9644f7d9759e9fc3babf41d658cbf7}\label{classFG__eval_a9e9644f7d9759e9fc3babf41d658cbf7}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!ang@{ang}}
+\index{ang@{ang}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{ang}{ang}}
+{\footnotesize\ttfamily AD$<$double$>$ F\+G\+\_\+eval\+::ang\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_a8cea35a0a3b58c8dc7cc9be19a1e9013}\label{classFG__eval_a8cea35a0a3b58c8dc7cc9be19a1e9013}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!ap@{ap}}
+\index{ap@{ap}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{ap}{ap}}
+{\footnotesize\ttfamily double F\+G\+\_\+eval\+::ap\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_a679badb474e00e9d169f1bdc24657129}\label{classFG__eval_a679badb474e00e9d169f1bdc24657129}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!dist@{dist}}
+\index{dist@{dist}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{dist}{dist}}
+{\footnotesize\ttfamily AD$<$double$>$ F\+G\+\_\+eval\+::dist\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_a5dcf5982e81dceca40b4bc474827b5aa}\label{classFG__eval_a5dcf5982e81dceca40b4bc474827b5aa}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!K1@{K1}}
+\index{K1@{K1}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{K1}{K1}}
+{\footnotesize\ttfamily AD$<$double$>$ F\+G\+\_\+eval\+::\+K1\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_af671d3c7db3b17c2a6fda4798b402320}\label{classFG__eval_af671d3c7db3b17c2a6fda4798b402320}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!K2@{K2}}
+\index{K2@{K2}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{K2}{K2}}
+{\footnotesize\ttfamily AD$<$double$>$ F\+G\+\_\+eval\+::\+K2\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_a6afb8dacd318791bdad27da2649ff618}\label{classFG__eval_a6afb8dacd318791bdad27da2649ff618}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!K3@{K3}}
+\index{K3@{K3}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{K3}{K3}}
+{\footnotesize\ttfamily AD$<$double$>$ F\+G\+\_\+eval\+::\+K3\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_a45479bca30dc7f49625d0d05fd17bc7c}\label{classFG__eval_a45479bca30dc7f49625d0d05fd17bc7c}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!K4@{K4}}
+\index{K4@{K4}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{K4}{K4}}
+{\footnotesize\ttfamily AD$<$double$>$ F\+G\+\_\+eval\+::\+K4\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_a969e08a07221e37ccce7ec008aea7356}\label{classFG__eval_a969e08a07221e37ccce7ec008aea7356}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!K5@{K5}}
+\index{K5@{K5}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{K5}{K5}}
+{\footnotesize\ttfamily AD$<$double$>$ F\+G\+\_\+eval\+::\+K5\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_ab24a3bc79de568dd46827959993a7dc6}\label{classFG__eval_ab24a3bc79de568dd46827959993a7dc6}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!preV@{preV}}
+\index{preV@{preV}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{preV}{preV}}
+{\footnotesize\ttfamily AD$<$double$>$ F\+G\+\_\+eval\+::preV\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_a2efce268a9d4e915e8cd6f670bf80217}\label{classFG__eval_a2efce268a9d4e915e8cd6f670bf80217}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!preW@{preW}}
+\index{preW@{preW}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{preW}{preW}}
+{\footnotesize\ttfamily AD$<$double$>$ F\+G\+\_\+eval\+::preW\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_ae37d43302e8c2f0768e0903afdc4dec5}\label{classFG__eval_ae37d43302e8c2f0768e0903afdc4dec5}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!xp@{xp}}
+\index{xp@{xp}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{xp}{xp}}
+{\footnotesize\ttfamily double F\+G\+\_\+eval\+::xp\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_a6ce3987053540554a0287422fb4f5ce2}\label{classFG__eval_a6ce3987053540554a0287422fb4f5ce2}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!yaw@{yaw}}
+\index{yaw@{yaw}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{yaw}{yaw}}
+{\footnotesize\ttfamily AD$<$double$>$ F\+G\+\_\+eval\+::yaw\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classFG__eval_a8df0b0ddcb354b68551c11a1788a9b6e}\label{classFG__eval_a8df0b0ddcb354b68551c11a1788a9b6e}} 
+\index{F\+G\+\_\+eval@{F\+G\+\_\+eval}!yp@{yp}}
+\index{yp@{yp}!F\+G\+\_\+eval@{F\+G\+\_\+eval}}
+\subsubsection{\texorpdfstring{yp}{yp}}
+{\footnotesize\ttfamily double F\+G\+\_\+eval\+::yp\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/inazio/\+T\+F\+G/code/catkin\+\_\+ws/src/mpc\+\_\+node/src/\hyperlink{mynlp_8h}{mynlp.\+h}\item 
+/home/inazio/\+T\+F\+G/code/catkin\+\_\+ws/src/mpc\+\_\+node/src/\hyperlink{mynlp_8cpp}{mynlp.\+cpp}\end{DoxyCompactItemize}
