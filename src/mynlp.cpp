@@ -1,11 +1,9 @@
 #include "mynlp.h"
-
 #include <vector>
 
-using CppAD::AD;
+//using CppAD::AD;
 
-//Global variable
-size_t N = 10; //Horizon
+size_t N = 30; //Horizon
 AD<double> dt = 0.1;
 
 //X vector managing variables
@@ -49,10 +47,12 @@ void FG_eval::operator()(ADvector& fg, const ADvector& x)
      //-------------------------------- f(x) Objective Function --------------------------------------------------------------
      fg[0]=0;
 
+    
      for(int i=0; i < N; i++){
-           fg[0] += K1*CppAD::pow( CppAD::pow( CppAD::pow(xp-x[x_start+i],2) + CppAD::pow(yp-x[y_start + i],2), 0.5) - dist , 2);
-           fg[0] += K2*CppAD::pow((ap - x[tita_start+i]) - ang,2);
-           fg[0] += K3*CppAD::pow(CppAD::atan2(yp-x[y_start+i], xp-x[x_start+i])- yaw -x[tita_start+i],2);
+           fg[0] += K1*CppAD::pow( CppAD::pow( CppAD::pow(xp-x[x_start+i],2) + CppAD::pow(yp-x[y_start + i],2), 0.5) - dist , 2)*(i+1);
+           fg[0] += K2*CppAD::pow((ap - x[tita_start+i]) - ang,2)*(i+1);
+           //fg[0] += K3*CppAD::pow(CppAD::atan2(yp-x[y_start+i], xp-x[x_start+i])- yaw -x[tita_start+i],2)*i;
+           fg[0] += K3*CppAD::pow(CppAD::atan2(x[y_start+i]-yp, x[x_start+i]-xp)- yaw -ap,2)*(i+1);
       }
 
       
@@ -61,11 +61,13 @@ void FG_eval::operator()(ADvector& fg, const ADvector& x)
 
       /* It doesn work at all
       //Give aditional importance to the end-point. Relevant for convergence at the end of the trajectory.
+      //An other option would be multiply each term cross time (or k)
       fg[0] += K4*0*CppAD::pow( CppAD::pow( CppAD::pow(xp-x[x_start+N-1],2) + CppAD::pow(yp-x[y_start + N-1],2), 0.5) - dist , 2);
       fg[0] += K4*1*CppAD::pow((ap - x[tita_start+N-1]) - ang,2);
       fg[0] += K4*0.1*CppAD::pow(CppAD::atan2(yp-x[y_start+N-1], xp-x[x_start+N-1])- yaw -x[tita_start+N-1],2);
       */
 
+      /*
        //Now it is limited with constraint eq.
       //Penalize first acceleration, relative to previous speed 
       fg[0] += K4*CppAD::pow( x[V_start]-preV,2 ) + K5*CppAD::pow(x[W_start]-preW,2);  
@@ -75,16 +77,17 @@ void FG_eval::operator()(ADvector& fg, const ADvector& x)
         fg[0] += K5*CppAD::pow( (x[W_start+i+1]-x[W_start+i]),2);
 
       }
+      */
       
       
-      /*
+      
       //Penalize actions    
       for(int i=0; i<N-1; i++){
            //Limit actions
-           fg[0] += K4*CppAD::pow(x[V_start+i],2);
-           fg[0] += K5*CppAD::pow(x[W_start+i],2);
+           fg[0] += K4*CppAD::pow(x[V_start+i],2)*(i+1);
+           fg[0] += K5*CppAD::pow(x[W_start+i],2)*(i+1);
       }
-      */
+      
       
       
       
@@ -106,6 +109,7 @@ void FG_eval::operator()(ADvector& fg, const ADvector& x)
     }
     //Add constraints to acceleration
 
+    /*
     fg[ng] = x[V_start]-preV;
     fg[ng+1] = x[W_start]-preW;
 
@@ -113,7 +117,15 @@ void FG_eval::operator()(ADvector& fg, const ADvector& x)
       fg[j] = x[V_start+i]-x[V_start+i-1];
       fg[j+1] = x[W_start+i]-x[W_start+i-1];
     }
+  */
 
+
+ /*
+  //TODO: Add Constraint not to collide with the person: Distance between robot and person must be greater than 1 m
+  for(int i=0; i<N; i++){
+    CppAD::pow(xp-x[x_start+i],2) + CppAD::pow(yp-x[y_start + i],2) >= 1;
+  }
+  */
      return;
 }
 
@@ -199,8 +211,8 @@ void myNLP::my_solve(double xp, double yp, double ap, double dist, double ang, d
         x_l[y_start + i] = -1.0e19;//Yr
         x_u[y_start + i] = +1.0e19;
 
-        x_l[tita_start + i] = -6.283;//tita_r
-        x_u[tita_start + i] = +6.283;
+        x_l[tita_start + i] = -3.14;//tita_r
+        x_u[tita_start + i] = +3.15;
     }
     for(int i=0; i<N-1; i++){
         x_l[V_start + i] = -vmax;//V_r

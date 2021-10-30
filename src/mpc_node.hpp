@@ -3,6 +3,7 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <nav_msgs/Path.h>
 #include <nav_msgs/Odometry.h>
+#include <std_msgs/Float64.h>
 #include <string>
 #include <tf/tf.h>
 #include <tf/transform_listener.h>
@@ -31,15 +32,13 @@ public:
     void publish_new_path(tf::TransformListener* transform_listener, myNLP* mynlp);
     void publish_new_actions(myNLP* mynlp);
     void get_parameters();
-    void control_loop();
 
     //Constructor
     Mpc_node();
+    ~Mpc_node(){std::cout<<"Jd= "<<Jd<<"; Jang= "<<Jang<<"; Jyaw= "<<Jyaw<<std::endl;};
+
 
 private:
-    
-    
-
     //--------------  ROS stuff  ------------------------------
     ros::NodeHandle n;
     ros::Rate rate; //10 Hz. T=0.1s
@@ -47,8 +46,6 @@ private:
     ros::Publisher pubV;
     ros::Subscriber subPose0;
     ros::Subscriber subPose1;
-    
-    
 
     //Transform_litener to get Transform robot0->World and store it in T
     tf::TransformListener transform_listener;
@@ -59,7 +56,6 @@ private:
     //geometry_msgs::PoseWithCovarianceStamped pose1;
     nav_msgs::Path path;
     
-
     //-------------------      ROS PARAM  -----------------------------------------------
     double dist = 3.0; // Desired distance between robot and person
     double ang = 0.0; //Desired tita of the robot
@@ -73,6 +69,11 @@ private:
     double wmax = 0.78;
     bool useGroundTruth = false;
 
+    //-------------------  COTNROL TIMER-------------------------------------
+    ros::Duration control_dt = ros::Duration(0.05);
+    void control_Callback(const ros::TimerEvent&);
+    ros::Timer control_timer;
+
     //-----------------------Object from class myNLP------------------------------
     myNLP mynlp;
 
@@ -84,9 +85,19 @@ private:
     double yp;
     double titap;
 
-    //ros::WallTime t0,tf,t1,t2; //Meassure computation time
+    double xpr;
+    double ypr;
+    double titapr;
 
+    ros::WallTime t0,tf,t1,t2; //Meassure computation time
 
+    //Cost function values achieved.
+    double Jd = 0;
+    double Jang = 0;
+    double Jyaw = 0;
+    ros::Publisher pubCost;
+    void record_Callback(const ros::TimerEvent&);
+    ros::Timer record_timer;
 
 
 

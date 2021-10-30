@@ -1,15 +1,10 @@
 #include "mpc_node.hpp"
 
-
-
-//Function Definitions:
-
 Mpc_node::Mpc_node(): mynlp(vmax,wmax), rate(10){
-        //--------------- ROS COMUNICATION -------------------------------------------------
+    //--------------- ROS COMUNICATION -------------------------------------------------
     // Init ROS, Publishers and suscribers
     //----------------------------------------------------------------------------------
 
-    
     //ros::NodeHandle n;
     //ros::Rate rate(10); //10 Hz. T=0.1s
 
@@ -24,24 +19,19 @@ Mpc_node::Mpc_node(): mynlp(vmax,wmax), rate(10){
     pubPath = n.advertise<nav_msgs::Path>("robot_0/matlab/path", 10);
     pubV = n.advertise<geometry_msgs::Twist>("robot_0/cmd_vel", 10);
 
-    //frame_id es base respecto a la cual está representado pose. Por eso es map.(En este caso, en el MPC puede que sea el robot o la persona etc.)
-    path.header.frame_id= "map";
+    //Control timer
+    control_timer = n.createTimer(control_dt, &Mpc_node::control_Callback,this);
+    
+    //Record cost
+    record_timer = n.createTimer(ros::Duration(0.1), &Mpc_node::record_Callback,this);
+    pubCost = n.advertise<std_msgs::Float64>("pubCost",10);
 
-    //Call mynlp constructor
-    //mynlp = new myNLP(vmax,wmax);
 }
 
+void Mpc_node::control_Callback(const ros::TimerEvent&){
+       t0 = ros::WallTime::now();
 
-void Mpc_node::control_loop(){
-    double xpr;
-    double ypr;
-    double titapr;
-    ros::WallTime t0,tf,t1,t2; //Meassure computation time
-    while (ros::ok()) {
-
-         t0 = ros::WallTime::now();
-
-         //Get new params if available
+        //Get new params if available
         get_parameters();
           
           
@@ -52,18 +42,14 @@ void Mpc_node::control_loop(){
         }
         catch (tf::TransformException ex) {
             ROS_ERROR("1st transform orm XX %s", ex.what());
+            //continue;
         }
-        
-        
         //Get time when optimal control starts. Use location at this time as reference for the full generated path.
         time_start = ros::Time::now();
         //Calculate person location relative to the robot_0 frame
         xpr = RT_person_robot.getOrigin().x();
         ypr = RT_person_robot.getOrigin().y();
         titapr = tf::getYaw(RT_person_robot.getRotation());
-
-        //std::cout<<"xpr"<<xpr<<"\n";
-        //std::cout<<"ypr"<<ypr<<"\n";
 
         //----------------------------Solve the nonlinear problem------------------------------------
         
@@ -79,21 +65,13 @@ void Mpc_node::control_loop(){
             K4 = 0;
         }
         std::cout<<"K4 = "<<K4<<"\n";
-        
 
-
-        mynlp.my_solve(xpr,ypr,titapr, dist, ang, yaw, K1, K2, K3, K4, K5);
-        
-
-        
+        mynlp.my_solve(xpr,ypr,titapr, dist, ang, yaw, K1, K2, K3, K4, K5);    //Solve nlp  
 
         t2 = ros::WallTime::now();
 
         publish_new_path(&transform_listener, &mynlp);
         publish_new_actions(&mynlp);
-
-
-
 
         tf = ros::WallTime::now();
         double exec_time = (tf-t0).toNSec()*1e-6;
@@ -101,16 +79,9 @@ void Mpc_node::control_loop(){
 
         std::cout <<"cylce exec time [ms]: "<<exec_time << "\n";
         std::cout <<"nlp time [ms]: "<<nlp_time << "\n";
-
-
-
-        ros::spinOnce();
-        rate.sleep();
-
-    }
-    ROS_INFO("Out of wphile loop");
-
 }
+
+
 void Mpc_node::get_parameters(){
     n.getParam("distance", dist);
     n.getParam("angle_tita", ang);
@@ -148,26 +119,21 @@ void Mpc_node::calculate_fake_path(double _xr, double _yr, double _wr,double _xp
     double x_goal = _xp + 3*sin(_wp);
     double y_goal = _yp + 3*cos(_wp);
 
-
     path.poses.resize(10);
     //Create path with 10 points between actual position and goal 
     for(int i=0; i<10; i++){
-    geometry_msgs::PoseStamped poseNew;
-    poseNew.pose.position.x = _xr + (x_goal-_xr)/(10-i);
-    poseNew.pose.position.y = _yr + (y_goal-_yr)/(10-i);
-    double w = _wr + (_wp-_wr)/(10-i);
-    poseNew.pose.orientation.w = cos(w/2);
-    poseNew.pose.orientation.z = sin(w/2);
-    poseNew.header.frame_id = "map";
+        geometry_msgs::PoseStamped poseNew;
+        poseNew.pose.position.x = _xr + (x_goal-_xr)/(10-i);
+        poseNew.pose.position.y = _yr + (y_goal-_yr)/(10-i);
+        double w = _wr + (_wp-_wr)/(10-i);
+        poseNew.pose.orientation.w = cos(w/2);
+        poseNew.pose.orientation.z = sin(w/2);
+        poseNew.header.frame_id = "map";
 
-    
-
-    path.poses[i] = poseNew;
-
+        path.poses[i] = poseNew;
     }
-
+    path.header.frame_id= "map";
     pubPath.publish(path);
-
 }
 
 void Mpc_node::publish_new_path(tf::TransformListener* transform_listener, myNLP* mynlp){
@@ -193,6 +159,7 @@ void Mpc_node::publish_new_path(tf::TransformListener* transform_listener, myNLP
 
         path.poses[i-2] = poseMap;
     }
+    path.header.frame_id= "map";
     pubPath.publish(path);
 }
 
@@ -201,4 +168,14 @@ void Mpc_node::publish_new_actions(myNLP* mynlp){
     cmd_vel.linear.x = mynlp->Vr[0];
     cmd_vel.angular.z = mynlp->Wr[0];
     pubV.publish(cmd_vel);
+}
+
+void Mpc_node::record_Callback(const ros::TimerEvent&){
+    Jd += K1*pow((sqrt(pow(xpr,2)+pow(ypr,2))-dist),2);
+    Jang += K2*pow((titapr-ang),2);
+    Jyaw += K3*pow((atan2(-ypr,-xpr)-yaw+titapr),2);
+
+    std_msgs::Float64 cost;
+    cost.data = Jd + Jang + Jyaw;
+    pubCost.publish(cost);
 }

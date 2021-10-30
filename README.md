@@ -6,8 +6,7 @@ ROS MPC node based on IpOpt and CppAD library for differential drive robot follo
 
 Workflow for simulation:
 -roscore
--roslaunch simulation stage-2-robots-empty.launch    (launches stage world)
--roslaunch simulation control-2-robots-empty.launch  (Optional. Can be skiped if you provide velocities directly)
+-roslaunch simulation control-2-robots-empty.launch  (Launches stage, map_server and fake_localization nodes.)
 -roslaunch mpc_node mpc-node-2-robots-MPC.launch     (MPC control of the robot)
 
 *Debugging and visualization:

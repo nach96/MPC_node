@@ -6,8 +6,6 @@ using CppAD::AD;
 
 typedef CPPAD_TESTVECTOR( double ) Dvector;
 
-
-
 #ifndef FG_EVAL_H
 #define FG_EVAL_H
 
@@ -34,16 +32,8 @@ private:
   AD<double> yaw;// = -1.57; //[rad]
   AD<double> preV;
   AD<double> preW;
-  
-
 };
-
-
-#endif
-
-
-
-
+#endif //FG_EVAL_H
 
 #ifndef MYNLP_H
 #define MYNLP_H
@@ -73,10 +63,5 @@ private:
     CppAD::ipopt::solve_result<Dvector> solution;
     double av = 1*0.1;
     double aw = 1*0.1;
-
-   
-
-
 };
-
 #endif // MYNLP_H
